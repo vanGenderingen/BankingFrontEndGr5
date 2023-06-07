@@ -5,9 +5,6 @@
       <h1 class="header-text">What we have to offer</h1>
     </div>
 
-    <!-- Whitespace -->
-    <div class="whitespace"></div>
-
     <!-- Two containers side by side -->
     <div class="containers">
       <!-- Container 1 -->
@@ -63,14 +60,9 @@ h1{
   color: white;
 }
 
-.whitespace {
-  height: 20px;
-}
-
 .containers {
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Adjust the margin-top as needed */
 }
 
 .container {
