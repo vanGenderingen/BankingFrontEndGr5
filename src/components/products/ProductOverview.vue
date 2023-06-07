@@ -56,7 +56,7 @@ h1{
   position: absolute;
   bottom: 20%;
   left: 10%;
-  width: 100%;
+  width: 90%;
   color: white;
 }
 
