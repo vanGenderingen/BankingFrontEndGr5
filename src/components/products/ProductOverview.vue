@@ -57,7 +57,7 @@ h1{
 
 .header-text {
   position: absolute;
-  bottom: 25%;
+  bottom: 20%;
   left: 10%;
   width: 100%;
   color: white;
