@@ -43,6 +43,10 @@ export default {
 </script>
 
 <style scoped>
+h1{
+  font-size: 100px;
+}
+
 .header-image {
   position: relative;
   height: 30vh; /* 30% of the viewport height */
@@ -53,9 +57,9 @@ export default {
 
 .header-text {
   position: absolute;
-  bottom: 40%;
-  left: 25%;
-  width: 50%;
+  bottom: 25%;
+  left: 10%;
+  width: 100%;
   color: white;
 }
 
