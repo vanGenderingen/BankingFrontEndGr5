@@ -15,7 +15,7 @@
         <product-container
             image-source="/src/assets/images/currentProductPhoto.jpg"
             title="Debit Accounts"
-            description="Text explaining the products"
+            description="Pay with your own debit card, fast, secure and simple"
         ></product-container>
       </div>
 
@@ -24,7 +24,7 @@
         <product-container
             image-source="/src/assets/images/savingsProductPhoto.jpg"
             title="Savings Accounts"
-            description="Text explaining the products"
+            description="Save money with our record braking interest rates"
         ></product-container>
       </div>
     </div>
@@ -70,7 +70,6 @@ export default {
 }
 
 .container {
-  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
