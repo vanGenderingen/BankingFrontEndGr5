@@ -90,7 +90,7 @@ export default {
       this.fetchAccounts();
     },
     fetchAccounts() {
-      const userId = '6b9dce34-5665-47a5-9c2e-1d323fee2794'; // Replace with the actual user ID
+      const userId = this.$route.params.userId;
       const limit = this.itemsPerPage;
       const offset = this.currentPage - 1;
       const searchstrings = this.searchQuery || undefined;

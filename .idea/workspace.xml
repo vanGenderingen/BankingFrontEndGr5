@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28661940-f57a-4a71-b4f8-5615742efd0b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/accounts/AccountListItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/accounts/AccountListItem.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/accounts/userAccountsOverview/UserAccountsOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/accounts/userAccountsOverview/UserAccountsOverview.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +57,7 @@
       <option name="presentableId" value="Default" />
       <updated>1686145543309</updated>
       <workItem from="1686145546301" duration="1103000" />
-      <workItem from="1686226102592" duration="21691000" />
+      <workItem from="1686226102592" duration="22105000" />
     </task>
     <servers />
   </component>
