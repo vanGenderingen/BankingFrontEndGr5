@@ -6,7 +6,7 @@ import Login from "@/components/login/Login.vue";
 import UsersOverview from "@/components/users/usersOverview/UsersOverview.vue";
 import UserAccountsOverview from '@/components/accounts/userAccountsOverview/UserAccountsOverview.vue';
 import GetAllAccounts from "@/components/accounts/allAccounts/getAllAccounts.vue";
-
+import CreateAccount from "@/components/accounts/CreateAccount.vue";
 
 const routes = [
   { path: '/', component: Home },
@@ -14,8 +14,8 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/users', component: UsersOverview },
   { path: '/accounts', component: GetAllAccounts},
-  { path: '/accounts/user/:userId/accounts', component: UserAccountsOverview }
-
+  { path: '/accounts/user/:userId/accounts', component: UserAccountsOverview },
+  { path: '/users/:userId/createAccount', component: CreateAccount }
 ];
 
 const router = createRouter({
