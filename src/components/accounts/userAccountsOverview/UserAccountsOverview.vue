@@ -106,6 +106,7 @@
   mounted() {
     this.fetchAccounts();
   }
+},
 };
 </script>
 

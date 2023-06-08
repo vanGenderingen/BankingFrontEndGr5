@@ -16,14 +16,20 @@
         </li>
         <li class="nav-item">
           <!-- add a router link to the login page (don't use the a tag!) -->
-          <router-link to="/login" class="nav-link" active-class="active"
-            >Login</router-link
+          <router-link to="/users" class="nav-link" active-class="active"
+            >Users</router-link
           >
         </li>
         <li class="nav-item">
           <!-- add a router link to the login page (don't use the a tag!) -->
           <router-link to="/accounts/user/{userId}/accounts" class="nav-link" active-class="active"
           >My Accounts</router-link
+          >
+        </li>
+        <li class="nav-item">
+          <!-- add a router link to the login page (don't use the a tag!) -->
+          <router-link to="/login" class="nav-link" active-class="active"
+            >Login</router-link
           >
         </li>
       </ul>
