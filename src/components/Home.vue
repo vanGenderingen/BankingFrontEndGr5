@@ -74,8 +74,9 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 50px;
+  margin-top: 100px;
   padding: 0 150px;
 }
 
@@ -84,24 +85,22 @@ body {
   border: 2px solid white;
   color: white;
   padding: 20px;
+  border-radius: 20px;
 }
 
 .block1 {
-  grid-column: 1 / span 2;
-  border-radius: 0 30px 30px 0;
-  transform: skewX(-10deg);
+  grid-column: 1;
+  grid-row: 1 / span 2;
 }
 
 .block2 {
-  grid-column: 2 / span 1;
-  border-radius: 30px 0 0 30px;
-  transform: skewX(10deg);
+  grid-column: 2 / span 2;
+  grid-row: 1;
 }
 
 .block3 {
-  grid-column: 3 / span 2;
-  border-radius: 0 30px 30px 0;
-  transform: skewX(-10deg);
+  grid-column: 2 / span 2;
+  grid-row: 2;
 }
 
 .text-block h2 {
