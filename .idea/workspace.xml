@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28661940-f57a-4a71-b4f8-5615742efd0b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/products/ProductContainer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/products/ProductContainer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/products/ProductOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/products/ProductOverview.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1686145543309</updated>
       <workItem from="1686145546301" duration="1103000" />
-      <workItem from="1686226102592" duration="2891000" />
+      <workItem from="1686226102592" duration="3650000" />
     </task>
     <servers />
   </component>
