@@ -5,25 +5,25 @@
       <div class="top-of-user-account-overview">
         <div class="pagination-and-amount">
           <div class="amount-info">Amount of items to list: </div>
-            <div class="dropdown">
-              <select v-model="itemsPerPage" @change="updateDisplayedAccounts" class="items-per-page-dropdown">
-                <option v-for="option in availableItemsPerPage" :value="option" :key="option">{{ option }}</option>
-              </select>
+          <div class="dropdown">
+            <select v-model="itemsPerPage" @change="updateDisplayedAccounts" class="items-per-page-dropdown">
+              <option v-for="option in availableItemsPerPage" :value="option" :key="option">{{ option }}</option>
+            </select>
+          </div>
+          <div class="pagination">
+            <button @click="previousPage" :disabled="currentPage === 1" class="pagination-button">Previous Page</button>
+            <div class="pagination-info">
+              Current Page: {{ currentPage }}
             </div>
-            <div class="pagination">
-              <button @click="previousPage" :disabled="currentPage === 1" class="pagination-button">Previous Page</button>
-              <div class="pagination-info">
-                Current Page: {{ currentPage }}
-              </div>
-              <button @click="nextPage" :disabled="hasMoreAccounts" class="pagination-button">Next Page</button>
-            </div>
+            <button @click="nextPage" class="pagination-button">Next Page</button>
+          </div>
         </div>
         <div class="search-bar">
           <input
               type="text"
               v-model="searchQuery"
               @input="search"
-              placeholder="Search by Account Name"
+              placeholder="Search by Account Name or a full IBAN"
               class="search-input"
           />
         </div>
@@ -55,9 +55,8 @@
 import AccountListItem from '@/components/accounts/AccountListItem.vue';
 import axios from 'axios';
 import Header from "@/components/Header.vue";
-
 export default {
-  name: "UserAccountsOverview",
+  name: "GetAllAccounts",
   components: {
     Header,
     AccountListItem
@@ -90,13 +89,21 @@ export default {
       this.fetchAccounts();
     },
     fetchAccounts() {
-      const userId = this.$route.params.userId;
       const limit = this.itemsPerPage;
       const offset = this.currentPage - 1;
-      const searchstrings = this.searchQuery || undefined;
+      let searchstrings = undefined;
+      let IBAN = undefined;
+      const ibanRegex = /^[A-Za-z]{2}\d{2}[A-Za-z]{4}\d{10}$/;
 
-      const url = `http://localhost:8080/accounts/user/${userId}/accounts`;
-      const params = { limit, offset, searchstrings };
+      // Check if the input contains a valid IBAN format
+      if (this.searchQuery && ibanRegex.test(this.searchQuery)) {
+        IBAN = this.searchQuery;
+      } else {
+        searchstrings = this.searchQuery;
+      }
+
+      const url = `http://localhost:8080/accounts`;
+      const params = { limit, offset, searchstrings, IBAN };
 
       axios
           .get(url, { params })
@@ -161,20 +168,39 @@ export default {
 }
 
 .pagination-button {
+  display: inline-block;
+  position: relative;
   background-color: transparent;
   color: white;
-  border: none; /* Add this line to remove the button border */
-  cursor: pointer; /* Add this line to set cursor to pointer */
-  transition: none; /* Add this line to remove any transition effects */
-  box-shadow: none; /* Add this line to remove any box shadow */
-  outline: none; /* Add this line to remove the outline */
+  border: none;
+  cursor: pointer;
+  transition: none;
+  box-shadow: none;
   margin-left: 10px;
   margin-right: 10px;
 }
 
 .pagination-button:hover,
 .pagination-button:active {
-  background-color: transparent; /* Add this line to remove any background color on hover and active states */
+  background-color: transparent;
+}
+
+.pagination-button::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.pagination-button:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .dropdown {
