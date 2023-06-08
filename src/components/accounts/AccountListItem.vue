@@ -1,6 +1,7 @@
 <template>
   <tr class="account-item" @click="navigateToAccount">
     <td class="account-cell">{{ account.IBAN }}</td>
+    <td class="account-cell">{{ account.Name }}</td>
     <td class="account-cell">{{ account.Type }}</td>
     <td class="account-cell">{{ account.Balance }}</td>
     <td class="account-cell">{{ account.MinBal }}</td>
