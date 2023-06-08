@@ -43,10 +43,6 @@ export default {
 </script>
 
 <style>
-h2 {
-  color: white;
-}
-
 input {
   margin-bottom: 10px;
 }

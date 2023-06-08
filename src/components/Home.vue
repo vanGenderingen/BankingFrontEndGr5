@@ -3,16 +3,17 @@
     <Header title="Welcome to the Red Bank"></Header>
     <div class="grid">
       <div class="text-block block1">
-        <h2 classs="h2-home">Block 1</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <h2>About Red Bank</h2>
+        <p>Welcome to Red Bank, the banking application inspired by the delightful flavors of Red Band candy! At Red Bank, we bring a unique blend of sweetness and reliability to your financial journey. Just like the iconic candy brand, we strive to create an experience that is enjoyable and satisfying. With a team of dedicated professionals, we are committed to providing exceptional banking services tailored to your needs. Join us and discover the perfect harmony of confectionery delight and financial expertise.</p>
+        <button class="centered-button">Get Started Now</button>
       </div>
       <div class="text-block block2">
-        <h2>Block 2</h2>
-        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <h2>Our Competitive rates</h2>
+        <p>At Red Bank, we understand the importance of making your money work for you. That's why we offer competitive rates that are as tempting as Red Band's mouthwatering candies. We believe that your hard-earned savings deserve to grow and flourish. Whether you're looking for a high-yield savings account, a rewarding credit card, or a competitive loan, we have you covered. With Red Bank, you can enjoy the sweet taste of financial success while savoring the satisfaction of getting the best rates in town.</p>
       </div>
       <div class="text-block block3">
-        <h2>Block 3</h2>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <h2>Simplicity of Red Bank</h2>
+        <p>Banking doesn't have to be complicated, just like the simplicity of enjoying a pack of Red Band candies. At Red Bank, we prioritize simplicity and convenience in every aspect of our services. With our user-friendly mobile app and intuitive online banking platform, managing your finances has never been easier. From transferring funds to paying bills, we offer streamlined solutions that save you time and effort. Say goodbye to the hassle and embrace the simplicity of Red Bank, where banking becomes a delightful treat.</p>
       </div>
     </div>
   </div>
@@ -31,9 +32,6 @@ export default {
 <style>
 h1 {
   font-size: 100px;
-}
-h2{
-
 }
 html,
 body {
@@ -63,11 +61,37 @@ body {
   color: white;
   padding: 20px;
   border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-block h2{
+  font-size: 30px;
+}
+
+.text-block p{
+  font-size: 20px;
 }
 
 .block1 {
   grid-column: 1;
   grid-row: 1 / span 2;
+}
+
+.centered-button {
+  background: #6f00ff;
+  color: white;
+  padding: 20px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  font-size: 20px;
 }
 
 .block2 {
@@ -78,15 +102,5 @@ body {
 .block3 {
   grid-column: 2 / span 2;
   grid-row: 2;
-}
-
-.text-block h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.text-block p {
-  font-size: 16px;
-  line-height: 1.4;
 }
 </style>
