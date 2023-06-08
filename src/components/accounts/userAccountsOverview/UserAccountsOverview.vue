@@ -2,21 +2,37 @@
   <div>
     <Header title="Your Accounts"></Header>
     <div class="account-overview">
-      <div class="pagination">
-        <div class="amount-info">Amount of items to list: </div>
-        <div class="dropdown">
-          <select v-model="itemsPerPage" @change="updateDisplayedAccounts" class="items-per-page-dropdown">
-            <option v-for="option in availableItemsPerPage" :value="option" :key="option">{{ option }}</option>
-          </select>
+      <div class="top-of-user-account-overview">
+        <div class="pagination-and-amount">
+          <div class="amount-info">Amount of items to list: </div>
+            <div class="dropdown">
+              <select v-model="itemsPerPage" @change="updateDisplayedAccounts" class="items-per-page-dropdown">
+                <option v-for="option in availableItemsPerPage" :value="option" :key="option">{{ option }}</option>
+              </select>
+            </div>
+            <div class="pagination">
+              <button @click="previousPage" :disabled="currentPage === 1" class="pagination-button">Previous Page</button>
+              <div class="pagination-info">
+                Current Page: {{ currentPage }}
+              </div>
+              <button @click="nextPage" :disabled="hasMoreAccounts" class="pagination-button">Next Page</button>
+            </div>
         </div>
-        <div class="pagination-info">
-          | Page {{ currentPage }} of {{ totalPages }}
+        <div class="search-bar">
+          <input
+              type="text"
+              v-model="searchQuery"
+              @input="search"
+              placeholder="Search by Account Name"
+              class="search-input"
+          />
         </div>
       </div>
       <table class="account-table">
         <thead>
         <tr>
           <th class="account-table-head"><h2>IBAN</h2></th>
+          <th class="account-table-head"><h2>Account Name</h2></th>
           <th class="account-table-head"><h2>Type</h2></th>
           <th class="account-table-head"><h2>Balance</h2></th>
           <th class="account-table-head"><h2>Minimum Balance needed to perform transactions</h2></th>
@@ -36,79 +52,76 @@
 </template>
 
 <script>
-  import AccountListItem from '@/components/accounts/AccountListItem.vue';
-  import axios from 'axios';
-  import Header from "@/components/Header.vue";
-  export default {
+import AccountListItem from '@/components/accounts/AccountListItem.vue';
+import axios from 'axios';
+import Header from "@/components/Header.vue";
+
+export default {
   name: "UserAccountsOverview",
   components: {
-  Header,
-  AccountListItem
-},
-    data() {
-      return {
-        accounts: [],
-        currentPage: 1,
-        itemsPerPage: 20,
-        availableItemsPerPage: [20, 30, 40, 50],
-        searchQuery: '',
-        totalAccounts: 0,
-        totalPages: 0 // Add totalPages property
-      };
-    },
-    methods: {
-      updateDisplayedAccounts() {
-        this.currentPage = 1;
-        this.fetchAccounts();
-      },
-      fetchAccounts() {
-        const userId = 'c0bf2769-79ef-40ca-8410-0c02652028e0'; // Replace with the actual user ID
-        const limit = this.itemsPerPage;
-        const offset = (this.currentPage - 1) * this.itemsPerPage;
-        const searchstrings = this.searchQuery || undefined;
-
-        const url = `http://localhost:8080/accounts/user/${userId}/accounts`;
-        const params = { limit, offset, searchstrings };
-
-        axios
-            .get(url, { params })
-            .then(response => {
-              this.accounts = response.data;
-
-              // Get the total account count from the response headers
-              const totalAccounts = parseInt(response.headers['x-total-count'], 10);
-              this.totalAccounts = totalAccounts || 0;
-
-              // Get the total number of pages from the response headers
-              const totalPages = parseInt(response.headers['x-total-pages'], 10);
-              this.totalPages = totalPages || 0;
-            })
-            .catch(error => {
-              console.error('Error retrieving accounts:', error);
-            });
-      },
-  computed: {
-    totalPages() {
-      return Math.ceil(this.totalAccounts / this.itemsPerPage);
-    },
-    displayedAccounts() {
-      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-      const endIndex = startIndex + this.itemsPerPage;
-
-      return this.accounts.slice(startIndex, endIndex);
-    }
+    Header,
+    AccountListItem
   },
-  watch: {
-    currentPage() {
+  data() {
+    return {
+      accounts: [],
+      currentPage: 1,
+      itemsPerPage: 10,
+      availableItemsPerPage: [10, 20, 30],
+      searchQuery: '',
+      hasAccounts: true
+    };
+  },
+  methods: {
+    previousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.fetchAccounts();
+      }
+    },
+    nextPage() {
+      if (this.displayedAccounts.length>0) {
+        this.currentPage++;
+        this.fetchAccounts();
+      }
+    },
+    updateDisplayedAccounts() {
+      this.currentPage = 1;
+      this.fetchAccounts();
+    },
+    fetchAccounts() {
+      const userId = '6b9dce34-5665-47a5-9c2e-1d323fee2794'; // Replace with the actual user ID
+      const limit = this.itemsPerPage;
+      const offset = this.currentPage - 1;
+      const searchstrings = this.searchQuery || undefined;
+
+      const url = `http://localhost:8080/accounts/user/${userId}/accounts`;
+      const params = { limit, offset, searchstrings };
+
+      axios
+          .get(url, { params })
+          .then(response => {
+            this.accounts = response.data;
+          })
+          .catch(error => {
+            console.error('Error retrieving accounts:', error);
+          });
+    },
+    search() {
+      this.currentPage = 1;
       this.fetchAccounts();
     }
+  },
+  computed: {
+    displayedAccounts() {
+      return this.accounts.slice(0, this.itemsPerPage);
+    },
   },
   mounted() {
     this.fetchAccounts();
   }
 };
 </script>
-
 
 <style scoped>
 .account-table {
@@ -125,16 +138,27 @@
   color: black;
 }
 
-.pagination {
+.top-of-user-account-overview{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+}
+
+.pagination-and-amount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 11px;
   color: white;
 }
 
 .pagination-info {
-  margin-right: 10px;
+  margin: 10px 10px 10px 0;
+}
+
+.pagination-button {
+  background-color: transparent;
+  color: white;
 }
 
 .dropdown {
@@ -151,5 +175,24 @@
 .items-per-page-dropdown option {
   color: black;
   background-color: white;
+}
+
+.search-bar {
+  display: flex;
+  width: 20%;
+  border-bottom: 1px solid #ddd;
+}
+
+.search-input {
+  flex: 1; /* Take up remaining space */
+  border: none;
+  margin-right: 10px;
+  background-color: transparent;
+  color: white;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: white;
 }
 </style>
