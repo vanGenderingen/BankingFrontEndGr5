@@ -31,7 +31,7 @@ export default {
 
 <style>
 h1 {
-  font-size: 100px;
+  font-size: 80px;
 }
 html,
 body {

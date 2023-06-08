@@ -27,8 +27,8 @@ export default {
 }
 
 .logo img {
-  width: 250px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
 }
 
 .header-text {
