@@ -47,6 +47,7 @@ export default {
 </script>
 
 <style>
+
 .h2-login {    
     color: white;
 }
@@ -63,7 +64,6 @@ form {
   display: flex;
   flex-direction: column;
 }
-
 
 input {
   margin-bottom: 10px;

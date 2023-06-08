@@ -29,8 +29,8 @@ export default {
 }
 
 .container-image {
-  width: 100%;
-  height: 300px;
+  width: 80%;
+  height: 400px;
   background-size: cover;
   background-position: center;
 }
@@ -45,22 +45,24 @@ export default {
   color: white;
 }
 
-h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+.container-text h2{
+  font-size: 30px;
 }
 
-p {
-  margin-bottom: 20px;
+.container-text p{
+  font-size: 20px;
 }
 
 button {
-  background-color: #2196f3;
+  background: #6f00ff;
   color: white;
-  padding: 10px 20px;
+  padding: 20px 20px;
   border: none;
   border-radius: 4px;
-  font-size: 16px;
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  font-size: 20px;
 }
 </style>

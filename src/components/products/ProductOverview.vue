@@ -1,12 +1,5 @@
 <template>
-  <div>
-    <div class="logo">
-      <img src="/src/assets/images/logo-redbank.png" alt="Logo" />
-      <div class="what-we-can-offer-text">
-        <h1>What Red Bank can offer you</h1>
-      </div>
-    </div>
-
+  <Header title="What Red Bank has to offer"></Header>
     <!-- Two containers side by side -->
     <div class="containers">
       <!-- Container 1 -->
@@ -27,45 +20,22 @@
         ></product-container>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
+import Header from "@/components/Header.vue";
 import ProductContainer from "@/components/products/ProductContainer.vue";
 
 export default {
   name: "ProductOverview",
   components: {
-    ProductContainer
+    ProductContainer,
+    Header
   }
 }
 </script>
 
 <style scoped>
-h1{
-  font-size: 100px;
-}
-
-.logo {
-  align-content: center;
-  padding: 20px;
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.logo img {
-  width: 250px;
-  height: 250px;
-}
-
-.what-we-can-offer-text {
-  display: flex;
-  align-items: center;
-  margin-left: 100px;
-  color: white;
-  text-align: center;
-}
-
 .containers {
   display: flex;
   justify-content: center;
