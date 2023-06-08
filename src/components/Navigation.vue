@@ -11,7 +11,7 @@
         <li class="nav-item">
           <!-- add a router link to the products page (don't use the a tag!) -->
           <router-link to="/products" class="nav-link" active-class="active"
-            >Overview</router-link
+            >Products</router-link
           >
         </li>
         <li class="nav-item">
