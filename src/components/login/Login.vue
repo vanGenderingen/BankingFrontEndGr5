@@ -44,7 +44,7 @@ export default {
 
 <style>
 h2 {
-  color: #333;
+  color: white;
 }
 
 input {

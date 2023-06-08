@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28661940-f57a-4a71-b4f8-5615742efd0b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/products/ProductOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/products/ProductOverview.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +18,13 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,7 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1686145543309</updated>
       <workItem from="1686145546301" duration="1103000" />
-      <workItem from="1686226102592" duration="4022000" />
+      <workItem from="1686226102592" duration="4884000" />
     </task>
     <servers />
   </component>

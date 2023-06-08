@@ -1,14 +1,9 @@
 <template>
   <div class="homepage">
-    <div class="logo">
-      <img src="/src/assets/images/logo-redbank.png" alt="Logo" />
-      <div class="welcome-text">
-        <h1>Welcome to the Red Bank</h1>
-      </div>
-    </div>
+    <Header title="Welcome to the Red Bank"></Header>
     <div class="grid">
       <div class="text-block block1">
-        <h2>Block 1</h2>
+        <h2 classs="h2-home">Block 1</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
       <div class="text-block block2">
@@ -24,8 +19,12 @@
 </template>
 
 <script>
+import Header from "@/components/Header.vue";
 export default {
   name: "Home",
+  components:{
+    Header
+  }
 };
 </script>
 
@@ -33,11 +32,9 @@ export default {
 h1 {
   font-size: 100px;
 }
+h2{
 
-h2 {
-  font-size: 100px;
 }
-
 html,
 body {
   height: 100%;
@@ -50,26 +47,6 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.logo {
-  align-content: center;
-  padding: 20px;
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.logo img {
-  width: 250px;
-  height: 250px;
-}
-
-.welcome-text {
-  display: flex;
-  align-items: center;
-  margin-left: 100px;
-  color: white;
-  text-align: center;
 }
 
 .grid {
