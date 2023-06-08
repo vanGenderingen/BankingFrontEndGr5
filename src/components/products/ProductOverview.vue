@@ -1,8 +1,10 @@
 <template>
   <div>
-    <!-- Full width image on top -->
-    <div class="header-image">
-      <h1 class="header-text">What we have to offer</h1>
+    <div class="logo">
+      <img src="/src/assets/images/logo-redbank.png" alt="Logo" />
+      <div class="what-we-can-offer-text">
+        <h1>What Red Bank can offer you</h1>
+      </div>
     </div>
 
     <!-- Two containers side by side -->
@@ -44,20 +46,24 @@ h1{
   font-size: 100px;
 }
 
-.header-image {
-  position: relative;
-  height: 30vh; /* 30% of the viewport height */
-  background-image: url('@/assets/images/bezigmetbanner.jpg');
-  background-size: cover;
-  background-position: center;
+.logo {
+  align-content: center;
+  padding: 20px;
+  display: flex;
+  margin-bottom: 20px;
 }
 
-.header-text {
-  position: absolute;
-  bottom: 20%;
-  left: 10%;
-  width: 90%;
+.logo img {
+  width: 250px;
+  height: 250px;
+}
+
+.what-we-can-offer-text {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
   color: white;
+  text-align: center;
 }
 
 .containers {

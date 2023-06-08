@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="28661940-f57a-4a71-b4f8-5615742efd0b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/products/ProductContainer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/products/ProductContainer.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/products/ProductOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/products/ProductOverview.vue" afterDir="false" />
     </list>
@@ -29,6 +35,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Florebol/Documents/GitHub/BankingFrontEndGr5",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -42,6 +53,7 @@
       <option name="presentableId" value="Default" />
       <updated>1686145543309</updated>
       <workItem from="1686145546301" duration="1103000" />
+      <workItem from="1686226102592" duration="2891000" />
     </task>
     <servers />
   </component>

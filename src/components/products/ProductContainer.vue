@@ -41,8 +41,8 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f8f8f8;
   padding: 20px;
+  color: white;
 }
 
 h2 {
