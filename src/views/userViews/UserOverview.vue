@@ -9,7 +9,7 @@
             <div class="value">
               <h2>{{ user.FirstName + " " + user.LastName }}</h2>
             </div>
-             <div class="label"><h2>Email:</h2></div>
+            <div class="label"><h2>Email:</h2></div>
             <div class="value">
               <h2>{{ user.Email }}</h2>
             </div>
@@ -32,8 +32,14 @@
           </div>
           <div id="user-avatar">
             <img src="/src/assets/images/logo-redbank.png" alt="Red Bank Logo" />
+
+            <h2 id="h2-create">Edit a user</h2>
+            <button id="create-user-button" @click="this.$router.push(`/users/${user.UserID}/edit`)">
+              Click here
+            </button>
           </div>
         </div>
+
         <div class="account-overview">
           <div class="pagination-and-amount-and-search">
             <div class="pagination-and-amount">
@@ -82,26 +88,26 @@
             </div>
           </div>
           <table class="account-table">
-        <thead>
-          <tr>
-            <th class="account-table-head"><h2>IBAN</h2></th>
-            <th class="account-table-head"><h2>Account Name</h2></th>
-            <th class="account-table-head"><h2>Type</h2></th>
-            <th class="account-table-head"><h2>Balance</h2></th>
-            <th class="account-table-head">
-              <h2>Minimum Balance</h2>
-            </th>
-            <th class="account-table-head"><h2>Status</h2></th>
-          </tr>
-        </thead>
-        <tbody>
-          <account-list-item
-            v-for="account in displayedAccounts"
-            :key="account.AccountID"
-            :account="account"
-          ></account-list-item>
-        </tbody>
-      </table>
+            <thead>
+              <tr>
+                <th class="account-table-head"><h2>IBAN</h2></th>
+                <th class="account-table-head"><h2>Account Name</h2></th>
+                <th class="account-table-head"><h2>Type</h2></th>
+                <th class="account-table-head"><h2>Balance</h2></th>
+                <th class="account-table-head">
+                  <h2>Minimum Balance</h2>
+                </th>
+                <th class="account-table-head"><h2>Status</h2></th>
+              </tr>
+            </thead>
+            <tbody>
+              <account-list-item
+                v-for="account in displayedAccounts"
+                :key="account.AccountID"
+                :account="account"
+              ></account-list-item>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -161,22 +167,22 @@ export default {
       this.fetchAccounts();
     },
     fetchAccounts() {
-  const limit = this.itemsPerPage;
-  const offset = (this.currentPage - 1) * this.itemsPerPage;
-  const searchstrings = this.searchQuery ? this.searchQuery.split(" ") : undefined;
+      const limit = this.itemsPerPage;
+      const offset = (this.currentPage - 1) * this.itemsPerPage;
+      const searchstrings = this.searchQuery ? this.searchQuery.split(" ") : undefined;
 
-  const url = `http://localhost:8080/accounts/user/${this.userID}/accounts`;
-  const params = { limit, offset, searchstrings };
-  axios
-    .get(url, { params })
-    .then((response) => {
-      this.accounts = response.data;
-      this.displayedAccounts = this.accounts.slice(0, this.itemsPerPage); // Add this line to update the displayed accounts
-    })
-    .catch((error) => {
-      console.error("Error retrieving accounts:", error);
-    });
-},
+      const url = `http://localhost:8080/accounts/user/${this.userID}/accounts`;
+      const params = { limit, offset, searchstrings };
+      axios
+        .get(url, { params })
+        .then((response) => {
+          this.accounts = response.data;
+          this.displayedAccounts = this.accounts.slice(0, this.itemsPerPage); // Add this line to update the displayed accounts
+        })
+        .catch((error) => {
+          console.error("Error retrieving accounts:", error);
+        });
+    },
   },
   mounted() {
     this.fetchUser();

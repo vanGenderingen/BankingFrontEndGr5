@@ -65,7 +65,7 @@
         </tbody>
       </table>
       <div class="createUser">
-        <h2 id="h2-create">Creating a user?</h2>
+        <h2 id="h2-create">Create a user</h2>
         <button id="create-user-button" @click="$router.push('/users/create')">
           Click here
         </button>

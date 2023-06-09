@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title="`Edit User: ${user.FirstName}`"></Header>
+    <Header :title="`Edit User: ${user.FirstName + user.LastName}`"></Header>
     <div class="container">
       <div class="content">
         <div class="user-info">
@@ -28,11 +28,37 @@
               <input v-model="user.Email" type="email" id="email" class="form-control" />
             </div>
             <div class="form-group">
-              <label for="password">Password:</label>
+              <label for="role">Role:</label>
+              <select v-model="user.Role" id="role" class="form-control">
+                <option value="User">User</option>
+                <option value="Employee">Employee</option>
+                <!-- Add more role options if needed -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="active">Active:</label>
               <input
-                v-model="user.Password"
-                type="password"
-                id="password"
+                v-model="user.Active"
+                type="checkbox"
+                id="active"
+                class="form-boxl"
+              />
+            </div>
+            <div class="form-group">
+              <label for="transaction-limit">Transaction Limit:</label>
+              <input
+                v-model="user.TransactionLimit"
+                type="number"
+                id="transaction-limit"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="daily-limit">Daily Limit:</label>
+              <input
+                v-model="user.DailyLimit"
+                type="number"
+                id="daily-limit"
                 class="form-control"
               />
             </div>
@@ -59,7 +85,16 @@ export default {
   data() {
     return {
       userID: this.$route.params.userId,
-      user: {},
+      user: {
+        FirstName: "",
+        LastName: "",
+        Email: "",
+        Password: "",
+        Active: false,
+        TransactionLimit: 0,
+        DailyLimit: 0,
+        Role: "User", // Set the default role value here
+      },
     };
   },
   methods: {
@@ -111,9 +146,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  border: 3px solid #ffffff;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  border: #ffffff solid 3px;
+  border-radius: 5%;
 }
 
 .user-details {
@@ -123,24 +157,45 @@ export default {
 }
 
 .form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  font-weight: bold;
-  color: white;
+  margin-bottom: 10px;
 }
 
 .form-control {
   width: 100%;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .actions {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+}
+
+.btn-primary:active {
+  background-color: #0062cc;
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }
 </style>
