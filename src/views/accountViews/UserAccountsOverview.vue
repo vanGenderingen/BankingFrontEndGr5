@@ -154,7 +154,7 @@ export default {
 }
 
 .account-table-head {
-  padding-left: 48px;
+  padding-left: 8px;
   padding-top: 10px;
   background-color: #f2f2f2;
   color: black;
