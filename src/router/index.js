@@ -5,6 +5,7 @@ import ProductOverview from "@/components/products/ProductOverview.vue";
 import Login from "@/components/login/Login.vue";
 import UsersOverview from "@/components/users/usersOverview/UsersOverview.vue";
 import UserAccountsOverview from '@/components/accounts/userAccountsOverview/UserAccountsOverview.vue';
+import CreateUser from '@/components/users/CreateUser.vue';
 
 
 const routes = [
@@ -12,7 +13,8 @@ const routes = [
   { path: '/products', component: ProductOverview },
   { path: '/login', component: Login },
   { path: '/users', component: UsersOverview },
-  { path: '/accounts/user/:userId/accounts', component: UserAccountsOverview }
+  { path: '/accounts/user/:userId/accounts', component: UserAccountsOverview },
+  { path: '/users/create', component: CreateUser }
 
 ];
 

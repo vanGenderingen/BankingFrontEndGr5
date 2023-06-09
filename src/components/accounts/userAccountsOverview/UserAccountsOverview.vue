@@ -120,7 +120,6 @@ export default {
   mounted() {
     this.fetchAccounts();
   }
-},
 };
 </script>
 
