@@ -1,74 +1,88 @@
 <template>
-  <div>
-    <Header title="Your Users"></Header>
-    <div class="account-overview">
-      <div class="top-of-user-overview">
-        <div class="pagination-and-amount">
-          <div class="amount-info">Amount of items to list:</div>
-          <div class="dropdown">
-            <select
-              v-model="itemsPerPage"
-              @change="updateDisplayedUsers"
-              class="items-per-page-dropdown"
-            >
-              <option
-                v-for="option in availableItemsPerPage"
-                :value="option"
-                :key="option"
-              >
-                {{ option }}
-              </option>
-            </select>
+  <Header :title="`User: ${account.IBAN}`"></Header>
+  <div class="container">
+    <div class="content">
+      <div class="account-info">
+        <div class="account-details">
+          <div class="label"><h2>Account Name:</h2></div>
+          <div class="value">
+            <h2>{{ account.Name }}</h2>
           </div>
-          <div class="pagination">
-            <button
-              @click="previousPage"
-              :disabled="currentPage === 1"
-              class="pagination-button"
-            >
-              Previous Page
-            </button>
-            <div class="pagination-info">Current Page: {{ currentPage }}</div>
-            <button @click="nextPage" class="pagination-button">Next Page</button>
+          <div class="label"><h2>Balance:</h2></div>
+          <div class="value">
+            <h2>{{ account.Balance }}</h2>
+          </div>
+          <div class="label"><h2>Account Type:</h2></div>
+          <div class="value">
+            <h2>{{ account.Type }}</h2>
+          </div>
+          <div class="label"><h2>Minimum Balance:</h2></div>
+          <div class="value">
+            <h2>{{ account.MinBal }}</h2>
           </div>
         </div>
-        <div class="search-bar">
-          <input
-            type="text"
-            v-model="searchQuery"
-            @input="search"
-            placeholder="Search for a user"
-            class="search-input"
-          />
+        <div id="account-logo">
+          <img src="/src/assets/images/logo-redbank.png" alt="Logo" />
         </div>
       </div>
-      <table class="user-table">
-        <thead>
-          <tr>
-            <th class="user-table-head"><h2>User ID</h2></th>
-            <th class="user-table-head"><h2>First Name</h2></th>
-            <th class="user-table-head"><h2>Last Name</h2></th>
-            <th class="user-table-head"><h2>Email</h2></th>
-            <th class="user-table-head"><h2>Roles</h2></th>
-            <th class="user-table-head"><h2>Active</h2></th>
-            <th class="user-table-head"><h2>Transaction Limit</h2></th>
-            <th class="user-table-head"><h2>Daily Limit</h2></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <UsersListItem
-            v-for="user in displayedUsers"
-            :key="user.UserID"
-            :user="user"
-          ></UsersListItem>
-        </tbody>
-      </table>
-      <div class="createUser">
-        <h2 id="h2-create">Creating a user?</h2>
-        <button id="create-user-button" @click="$router.push('/users/create')">
-          Click here
-        </button>
+      <div class="transaction-overview">
+        <div class="pagination-and-amount-and-search">
+          <div class="pagination-and-amount">
+            <div class="amount-info">Amount of items to list:</div>
+            <div class="dropdown">
+              <select
+                v-model="itemsPerPage"
+                @change="updateDisplayedTransactions"
+                class="items-per-page-dropdown"
+              >
+                <option
+                  v-for="option in availableItemsPerPage"
+                  :value="option"
+                  :key="option"
+                >
+                  {{ option }}
+                </option>
+              </select>
+            </div>
+            <div class="pagination">
+              <button
+                @click="previousPage"
+                :disabled="currentPage === 1"
+                class="pagination-button"
+              >
+                Previous Page
+              </button>
+              <div class="pagination-info">Current Page: {{ currentPage }}</div>
+              <button @click="nextPage" class="pagination-button">Next Page</button>
+            </div>
+          </div>
+          <div class="search-bar">
+            <input
+              type="text"
+              v-model="searchQuery"
+              @input="search"
+              placeholder="Search"
+              class="search-input"
+            />
+          </div>
+        </div>
+        <table class="transaction-table">
+          <thead>
+            <tr>
+              <th class="transaction-table-head"><h2>Date</h2></th>
+              <th class="transaction-table-head"><h2>Description</h2></th>
+              <th class="transaction-table-head"><h2>Type</h2></th>
+              <th class="transaction-table-head"><h2>amount</h2></th>
+            </tr>
+          </thead>
+          <tbody>
+            <transaction-list-item
+              v-for="transaction in displayedTransactions"
+              :key="transaction.transactionID"
+              :transaction="transaction"
+            ></transaction-list-item>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -80,10 +94,10 @@ import axios from "axios";
 import Header from "@/views/generalViews/Header.vue";
 
 export default {
-  name: "UsersOverview",
+  name: "UserOverview",
   components: {
     Header,
-    UsersListItem,
+    AccountListItem,
   },
   data() {
     return {
@@ -94,17 +108,6 @@ export default {
       availableItemsPerPage: [10, 20],
       searchQuery: "",
     };
-  },
-  computed: {
-    totalUsers() {
-      return this.users.length;
-    },
-    totalPages() {
-      return Math.ceil(this.totalUsers / this.itemsPerPage);
-    },
-    hasMoreUsers() {
-      return this.currentPage < this.totalPages;
-    },
   },
   methods: {
     fetchUsers() {
@@ -117,7 +120,7 @@ export default {
       const params = { limit, offset, searchstrings };
 
       axios
-        .get(url, { params })
+        .get(url)
         .then((response) => {
           this.users = response.data;
           this.updateDisplayedUsers();
@@ -125,14 +128,6 @@ export default {
         .catch((error) => {
           console.error("Error retrieving users:", error);
         });
-    },
-    search() {
-      this.currentPage = 1;
-      this.fetchUsers();
-    },
-    updateDisplayedUsers() {
-      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-      this.displayedUsers = this.users.slice(startIndex, startIndex + this.itemsPerPage);
     },
     previousPage() {
       if (this.currentPage > 1) {
@@ -153,48 +148,59 @@ export default {
 };
 </script>
 
-<style scoped>
-.createUser {
-  display: grid;
-  width: 50%;
+<style>
+.container {
+  width: calc(100% - 300px);
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-left: 6%;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
-#h2-create {
-  font-weight: 700;
-  color: #ddd;
+.content {
+  flex: 1;
 }
 
-#create-user-button {
-  background-color: #6f00ff;
-  width: 10%;
-  color: #fff;
-  text-align: center;
-  margin-left: 5%;
-  border: 1px solid #6f00ff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.user-table {
-  width: calc(100% - 300px); /* Adjust the value based on your requirements */
-  margin: 0 auto;
+.account-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: white;
+  padding: 20px;
+  border: #ffffff solid 3px;
+  border-radius: 5%;
+}
+
+.account-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+#account-logo img {
+  margin-left: 150px;
+  width: 200px;
+  height: 200px;
+}
+
+.transaction-table {
+  color: white;
+  width: 100%;
   border-collapse: collapse;
-  border: 1px solid #ddd;
+  margin-top: 20px;
 }
 
-.user-table-head {
-  padding-left: 8px;
-  padding-top: 10px;
-  background-color: #f2f2f2;
-  color: black;
+.transaction-overview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.top-of-user-overview {
+.pagination-and-amount-and-search {
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -204,12 +210,27 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 11px;
+  margin-bottom: 3px;
   color: white;
 }
 
-.pagination-info {
-  margin: 10px 10px 10px 0;
+.dropdown {
+  position: relative;
+}
+
+.items-per-page-dropdown {
+  color: white;
+  background-color: transparent;
+  border: none;
+  padding: 5px 10px;
+}
+
+.items-per-page-dropdown option {
+  color: black;
+  background-color: white;
+}
+.pagination {
+  margin-left: 40px;
 }
 
 .pagination-button {
@@ -248,26 +269,10 @@ export default {
   transform-origin: bottom left;
 }
 
-.dropdown {
-  position: relative;
-}
-
-.items-per-page-dropdown {
-  color: white;
-  background-color: transparent;
-  border: none;
-  padding: 5px 10px;
-}
-
-.items-per-page-dropdown option {
-  color: black;
-  background-color: white;
-}
-
 .search-bar {
   display: flex;
-  margin-left: 10px;
   width: 20%;
+  margin-left: 40px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -282,5 +287,24 @@ export default {
 
 .search-input::placeholder {
   color: white;
+}
+
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.transaction-table-head {
+  padding-left: 48px;
+  padding-top: 10px;
+  background-color: #f2f2f2;
+  color: black;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
 }
 </style>
