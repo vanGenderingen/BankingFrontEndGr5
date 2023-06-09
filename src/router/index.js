@@ -10,6 +10,7 @@ import SingleAccount from "@/views/accountViews/SingleAcountOverview.vue";
 import CreateAccount from "@/views/accountViews/CreateAccount.vue";
 import CreateUser from '@/views/userViews/CreateUser.vue';
 import UserOverview from '@/views/userViews/UserOverview.vue';
+import EditUser from '@/views/userViews/EditUser.vue';
 
 const routes = [
   { path: '/', component: Home },
@@ -23,6 +24,7 @@ const routes = [
   { path: '/accounts/user/:userId/accounts', component: UserAccountsOverview },
   { path: '/users/create', component: CreateUser },
   { path: '/users/:userId', component: UserOverview },
+  { path: '/users/edit', component: EditUser },
 ];
 
 const router = createRouter({
