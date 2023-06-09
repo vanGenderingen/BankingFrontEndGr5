@@ -57,7 +57,7 @@ export default {
           // Store the token in the session storage
           sessionStorage.setItem('token', token);
 
-          this.$router.push('/');
+          this.$router.push('/accounts/user/${userId}/accounts');
         })
         .catch(error => {
           console.error('Error logging in:', error);
