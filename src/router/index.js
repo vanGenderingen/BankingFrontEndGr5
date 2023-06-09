@@ -6,6 +6,7 @@ import Login from "@/components/login/Login.vue";
 import UsersOverview from "@/components/users/usersOverview/UsersOverview.vue";
 import UserAccountsOverview from '@/components/accounts/userAccountsOverview/UserAccountsOverview.vue';
 import GetAllAccounts from "@/components/accounts/allAccounts/getAllAccounts.vue";
+import SingleAccount from "@/components/accounts/singleAccountOverview/SingleAcountOverview.vue";
 import CreateAccount from "@/components/accounts/CreateAccount.vue";
 import CreateUser from '@/components/users/CreateUser.vue';
 import UserOverview from '@/components/users/usersOverview/UserOverview.vue';
@@ -16,6 +17,7 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/users', component: UsersOverview },
   { path: '/accounts', component: GetAllAccounts},
+  { path: '/accounts/:accountId', component: SingleAccount},
   { path: '/accounts/user/:userId/accounts', component: UserAccountsOverview },
   { path: '/users/:userId/createAccount', component: CreateAccount },
   { path: '/accounts/user/:userId/accounts', component: UserAccountsOverview },
