@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
+import Header from "@/views/generalViews/Header.vue";
 export default {
   name: "Home",
   components:{

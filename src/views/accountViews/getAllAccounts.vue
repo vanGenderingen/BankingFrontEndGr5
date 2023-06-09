@@ -54,7 +54,7 @@
 <script>
 import AccountListItem from '@/components/accounts/AccountListItem.vue';
 import axios from 'axios';
-import Header from "@/components/Header.vue";
+import Header from "@/views/generalViews/Header.vue";
 export default {
   name: "GetAllAccounts",
   components: {
@@ -139,7 +139,7 @@ export default {
 }
 
 .account-table-head {
-  padding-left: 48px;
+  padding-left: 8px;
   padding-top: 10px;
   background-color: #f2f2f2;
   color: black;

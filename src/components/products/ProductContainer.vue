@@ -4,7 +4,7 @@
     <div class="container-text">
       <h2>{{ title }}</h2>
       <p>{{ description }}</p>
-      <button>Create your account now</button>
+      <p>Go to one of our locations to get started!</p>
     </div>
   </div>
 </template>

@@ -5,10 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28661940-f57a-4a71-b4f8-5615742efd0b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/accounts/singleAccountOverview/SingleAcountOverview.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/accounts/singleAccountOverview/TransactionListItem.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generalViews/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generalViews/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generalViews/Navigation.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/accounts/CreateAccount.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/accountViews/CreateAccount.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/accounts/allAccounts/getAllAccounts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/accountViews/getAllAccounts.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/accounts/singleAccountOverview/SingleAcountOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/accountViews/SingleAcountOverview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/accounts/singleAccountOverview/TransactionListItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/accounts/TransactionListItem.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/accounts/userAccountsOverview/UserAccountsOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/accountViews/UserAccountsOverview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generalViews/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/products/ProductContainer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/products/ProductContainer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/products/ProductOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generalViews/ProductOverview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/CreateUser.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/userViews/CreateUser.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/usersOverview/UserOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/userViews/UserOverview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/usersOverview/UsersOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/userViews/UsersOverview.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AboutView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/HomeView.vue" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +66,14 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Florebol\Documents\GitHub\BankingFrontEndGr5\src\views\userViews" />
+      <recent name="C:\Users\Florebol\Documents\GitHub\BankingFrontEndGr5\src\views\generalViews" />
+      <recent name="C:\Users\Florebol\Documents\GitHub\BankingFrontEndGr5\src\views\accountViews" />
+      <recent name="C:\Users\Florebol\Documents\GitHub\BankingFrontEndGr5\src\components\accounts" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

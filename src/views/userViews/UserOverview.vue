@@ -77,7 +77,7 @@
 <script>
 import UsersListItem from "@/components/users/UsersListItem.vue";
 import axios from "axios";
-import Header from "@/components/Header.vue";
+import Header from "@/views/generalViews/Header.vue";
 
 export default {
   name: "UsersOverview",
@@ -108,11 +108,12 @@ export default {
   },
   methods: {
     fetchUsers() {
+      const userId = this.$route.params.userId;
       const limit = this.itemsPerPage;
       const offset = (this.currentPage - 1) * this.itemsPerPage;
       const searchstrings = this.searchQuery || undefined;
 
-      const url = `http://localhost:8080/users`;
+      const url = `http://localhost:8080/users/${userId}`;
       const params = { limit, offset, searchstrings };
 
       axios

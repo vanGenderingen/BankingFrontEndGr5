@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../components/Home.vue';
+import Home from '../views/generalViews/Home.vue';
 
-import ProductOverview from "@/components/products/ProductOverview.vue";
-import Login from "@/components/login/Login.vue";
-import UsersOverview from "@/components/users/usersOverview/UsersOverview.vue";
-import UserAccountsOverview from '@/components/accounts/userAccountsOverview/UserAccountsOverview.vue';
-import GetAllAccounts from "@/components/accounts/allAccounts/getAllAccounts.vue";
-import SingleAccount from "@/components/accounts/singleAccountOverview/SingleAcountOverview.vue";
-import CreateAccount from "@/components/accounts/CreateAccount.vue";
-import CreateUser from '@/components/users/CreateUser.vue';
-import UserOverview from '@/components/users/usersOverview/UserOverview.vue';
+import ProductOverview from "@/views/generalViews/ProductOverview.vue";
+import Login from "@/views/generalViews/Login.vue";
+import UsersOverview from "@/views/userViews/UsersOverview.vue";
+import UserAccountsOverview from '@/views/accountViews/UserAccountsOverview.vue';
+import GetAllAccounts from "@/views/accountViews/getAllAccounts.vue";
+import SingleAccount from "@/views/accountViews/SingleAcountOverview.vue";
+import CreateAccount from "@/views/accountViews/CreateAccount.vue";
+import CreateUser from '@/views/userViews/CreateUser.vue';
+import UserOverview from '@/views/userViews/UserOverview.vue';
 
 const routes = [
   { path: '/', component: Home },

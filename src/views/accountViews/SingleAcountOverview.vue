@@ -67,9 +67,9 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
+import Header from "@/views/generalViews/Header.vue";
 import axios from "axios";
-import TransactionListItem from "@/components/accounts/singleAccountOverview/TransactionListItem.vue";
+import TransactionListItem from "@/components/accounts/TransactionListItem.vue";
 
 export default {
   name: "SingleAccount",
