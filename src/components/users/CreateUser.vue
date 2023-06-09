@@ -23,13 +23,20 @@
         <div class="form-group">
           <label for="role">Role:</label>
           <select type="text" id="role" v-model="user.role" required>
-            <option value="User">User</option> <!-- Update value to "USER" -->
-            <option value="Employee">Employee</option> <!-- Update value to "EMPLOYEE" -->
-        </select>
+            <option value="User">User</option>
+            <!-- Update value to "USER" -->
+            <option value="Employee">Employee</option>
+            <!-- Update value to "EMPLOYEE" -->
+          </select>
         </div>
         <div class="form-group">
           <label for="transactionLimit">Transaction Limit:</label>
-          <input type="number" id="transactionLimit" v-model="user.transactionLimit" required />
+          <input
+            type="number"
+            id="transactionLimit"
+            v-model="user.transactionLimit"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="dailyLimit">Daily Limit:</label>
@@ -55,15 +62,15 @@ export default {
   },
   data() {
     return {
-      user: { 
+      user: {
         firstName: "",
         lastName: "",
         email: "",
         password: "",
-        role: "User", 
+        role: "User",
         transactionLimit: 1000,
         dailyLimit: 250,
-      }
+      },
     };
   },
   methods: {
@@ -73,20 +80,19 @@ export default {
         LastName: this.user.lastName,
         Email: this.user.email,
         Password: this.user.password,
-        Role: this.user.role,
+        Roles: this.user.role,
         TransactionLimit: this.user.transactionLimit,
-        DailyLimit: this.user.dailyLimit
+        DailyLimit: this.user.dailyLimit,
       };
 
       axios
-        .post('http://localhost:8080/users', createUserDTO)
-        .then(response => {
-          console.log('User created:', response.data);
+        .post("http://localhost:8080/users", createUserDTO)
+        .then((response) => {
+          console.log("User created:", response.data);
           this.$router.push("/users");
         })
-        .catch(error => {
-          console.error('Error creating user:', error.response.data);
-          
+        .catch((error) => {
+          console.error("Error creating user:", error.response.data);
         });
     },
     cancel() {
