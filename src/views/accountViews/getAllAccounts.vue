@@ -107,8 +107,15 @@ export default {
       const url = `http://localhost:8080/accounts`;
       const params = { limit, offset, searchstrings, IBAN };
 
+      const token = sessionStorage.getItem('token');
+
       axios
-          .get(url, { params })
+          .get(url, {
+            params,
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
           .then(response => {
             this.accounts = response.data;
           })
