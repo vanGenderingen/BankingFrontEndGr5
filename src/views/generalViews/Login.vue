@@ -57,8 +57,7 @@ export default {
           // Store the token in the session storage
           sessionStorage.setItem('token', token);
 
-          this.$router.push('/login');
-          
+          this.$router.push('/');
         })
         .catch(error => {
           console.error('Error logging in:', error);
@@ -80,8 +79,6 @@ export default {
 }
 
 #h2-create {
-  margin-top: 5%;
-  margin: 1%;
   color: white;
   font-weight: 800;
 }

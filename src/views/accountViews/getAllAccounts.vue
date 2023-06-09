@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header title="Your Accounts"></Header>
+    <Header title="All Accounts"></Header>
     <div class="account-overview">
       <div class="top-of-user-account-overview">
         <div class="pagination-and-amount">
@@ -55,6 +55,7 @@
 import AccountListItem from '@/components/accounts/AccountListItem.vue';
 import axios from 'axios';
 import Header from "@/views/generalViews/Header.vue";
+
 export default {
   name: "GetAllAccounts",
   components: {
@@ -68,7 +69,8 @@ export default {
       itemsPerPage: 10,
       availableItemsPerPage: [10, 20, 30],
       searchQuery: '',
-      hasAccounts: true
+      hasAccounts: true,
+      showEmployeeButton: false,
     };
   },
   methods: {
@@ -237,5 +239,10 @@ export default {
 
 .search-input::placeholder {
   color: white;
+}
+
+.employee-button{
+  padding: 100px;
+  background: yellow;
 }
 </style>
