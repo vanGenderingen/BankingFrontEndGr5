@@ -23,6 +23,7 @@
 <script>
 import Header from "@/views/generalViews/Header.vue";
 import axios from 'axios';
+import VueJwtDecode from "vue-jwt-decode";
 
 export default {
   name: "Login",
@@ -46,23 +47,28 @@ export default {
       const url = 'http://localhost:8080/login';
 
       axios
-        .post(url, {
-          email: this.email,
-          password: this.password,
-        })
-        .then(response => {
-          const token = response.data.token;
-          
-          console.log('Login successful:', token);
-          // Store the token in the session storage
-          sessionStorage.setItem('token', token);
+          .post(url, {
+            email: this.email,
+            password: this.password,
+          })
+          .then(response => {
+            const token = response.data.token;
+            console.log('Login successful:', token);
+            // Store the token in the session storage
+            sessionStorage.setItem('token', token);
+            try {
+              const decodedToken = VueJwtDecode.decode(token);
+              const userID = decodedToken.sub;
+              this.$router.push(`/accounts/user/${userID}/accounts`);
+            } catch (err) {
+              console.log('Token is null: ', err);
+            }
+          })
+          .catch(error => {
+            console.error('Error logging in:', error);
+            // Handle the login error, such as displaying an error message
+          });
 
-          this.$router.push('/accounts/user/${userId}/accounts');
-        })
-        .catch(error => {
-          console.error('Error logging in:', error);
-          // Handle the login error, such as displaying an error message
-        });
     },
   },
 };
