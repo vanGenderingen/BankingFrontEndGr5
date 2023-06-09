@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     navigateToUser() {
-      this.$router.push(`/users`);
+      this.$router.push(`/users/${this.user.UserID}`);
     },
   },
 };
