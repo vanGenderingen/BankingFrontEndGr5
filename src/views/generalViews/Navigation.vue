@@ -10,7 +10,7 @@
           <!-- add a router link to the products page (don't use the a tag!) -->
           <router-link to="/products" class="nav-link" active-class="active">Products</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item"  v-if="userRole === 'ROLE_USER' || userRole === 'ROLE_EMPLOYEE'">
           <!-- add a router link to the user's accounts page (don't use the a tag!) -->
           <router-link :to="`/accounts/user/${userId}/accounts`" class="nav-link" active-class="active">My Accounts</router-link>
         </li>
@@ -38,7 +38,7 @@ export default {
   name: "Navigation",
   data() {
     return {
-      userRole: 'ROLE_USER',
+      userRole: '',
     }
   },
   mounted() {
