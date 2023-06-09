@@ -1,10 +1,48 @@
 <template>
   <div>
-    <Header :title="`User: ${(user.FirstName, userLastName)}`"></Header>
-
+    <Header title="Your Users"></Header>
     <div class="account-overview">
-      <div class="top-of-user-overview"></div>
-      <table class="user-tabUserle">
+      <div class="top-of-user-overview">
+        <div class="pagination-and-amount">
+          <div class="amount-info">Amount of items to list:</div>
+          <div class="dropdown">
+            <select
+              v-model="itemsPerPage"
+              @change="updateDisplayedUsers"
+              class="items-per-page-dropdown"
+            >
+              <option
+                v-for="option in availableItemsPerPage"
+                :value="option"
+                :key="option"
+              >
+                {{ option }}
+              </option>
+            </select>
+          </div>
+          <div class="pagination">
+            <button
+              @click="previousPage"
+              :disabled="currentPage === 1"
+              class="pagination-button"
+            >
+              Previous Page
+            </button>
+            <div class="pagination-info">Current Page: {{ currentPage }}</div>
+            <button @click="nextPage" class="pagination-button">Next Page</button>
+          </div>
+        </div>
+        <div class="search-bar">
+          <input
+            type="text"
+            v-model="searchQuery"
+            @input="search"
+            placeholder="Search for a user"
+            class="search-input"
+          />
+        </div>
+      </div>
+      <table class="user-table">
         <thead>
           <tr>
             <th class="user-table-head"><h2>User ID</h2></th>
@@ -26,6 +64,12 @@
           ></UsersListItem>
         </tbody>
       </table>
+      <div class="createUser">
+        <h2 id="h2-create">Creating a user?</h2>
+        <button id="create-user-button" @click="$router.push('/users/create')">
+          Click here
+        </button>
+      </div>
     </div>
   </div>
 </template>

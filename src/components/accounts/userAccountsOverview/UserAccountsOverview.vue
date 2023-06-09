@@ -4,47 +4,69 @@
     <div class="account-overview">
       <div class="top-of-user-account-overview">
         <div class="pagination-and-amount">
-          <div class="amount-info">Amount of items to list: </div>
-            <div class="dropdown">
-              <select v-model="itemsPerPage" @change="updateDisplayedAccounts" class="items-per-page-dropdown">
-                <option v-for="option in availableItemsPerPage" :value="option" :key="option">{{ option }}</option>
-              </select>
-            </div>
-            <div class="pagination">
-              <button @click="previousPage" :disabled="currentPage === 1" class="pagination-button">Previous Page</button>
-              <div class="pagination-info">
-                Current Page: {{ currentPage }}
-              </div>
-              <button @click="nextPage" :disabled="hasMoreAccounts" class="pagination-button">Next Page</button>
-            </div>
+          <div class="amount-info">Amount of items to list:</div>
+          <div class="dropdown">
+            <select
+              v-model="itemsPerPage"
+              @change="updateDisplayedAccounts"
+              class="items-per-page-dropdown"
+            >
+              <option
+                v-for="option in availableItemsPerPage"
+                :value="option"
+                :key="option"
+              >
+                {{ option }}
+              </option>
+            </select>
+          </div>
+          <div class="pagination">
+            <button
+              @click="previousPage"
+              :disabled="currentPage === 1"
+              class="pagination-button"
+            >
+              Previous Page
+            </button>
+            <div class="pagination-info">Current Page: {{ currentPage }}</div>
+            <button
+              @click="nextPage"
+              :disabled="hasMoreAccounts"
+              class="pagination-button"
+            >
+              Next Page
+            </button>
+          </div>
         </div>
         <div class="search-bar">
           <input
-              type="text"
-              v-model="searchQuery"
-              @input="search"
-              placeholder="Search by Account Name"
-              class="search-input"
+            type="text"
+            v-model="searchQuery"
+            @input="search"
+            placeholder="Search by Account Name"
+            class="search-input"
           />
         </div>
       </div>
       <table class="account-table">
         <thead>
-        <tr>
-          <th class="account-table-head"><h2>IBAN</h2></th>
-          <th class="account-table-head"><h2>Account Name</h2></th>
-          <th class="account-table-head"><h2>Type</h2></th>
-          <th class="account-table-head"><h2>Balance</h2></th>
-          <th class="account-table-head"><h2>Minimum Balance needed to perform transactions</h2></th>
-          <th class="account-table-head"><h2>Status</h2></th>
-        </tr>
+          <tr>
+            <th class="account-table-head"><h2>IBAN</h2></th>
+            <th class="account-table-head"><h2>Account Name</h2></th>
+            <th class="account-table-head"><h2>Type</h2></th>
+            <th class="account-table-head"><h2>Balance</h2></th>
+            <th class="account-table-head">
+              <h2>Minimum Balance needed to perform transactions</h2>
+            </th>
+            <th class="account-table-head"><h2>Status</h2></th>
+          </tr>
         </thead>
         <tbody>
-        <account-list-item
+          <account-list-item
             v-for="account in displayedAccounts"
             :key="account.AccountID"
             :account="account"
-        ></account-list-item>
+          ></account-list-item>
         </tbody>
       </table>
     </div>
@@ -52,15 +74,15 @@
 </template>
 
 <script>
-import AccountListItem from '@/components/accounts/AccountListItem.vue';
-import axios from 'axios';
+import AccountListItem from "@/components/accounts/AccountListItem.vue";
+import axios from "axios";
 import Header from "@/components/Header.vue";
 
 export default {
   name: "UserAccountsOverview",
   components: {
     Header,
-    AccountListItem
+    AccountListItem,
   },
   data() {
     return {
@@ -68,8 +90,8 @@ export default {
       currentPage: 1,
       itemsPerPage: 10,
       availableItemsPerPage: [10, 20, 30],
-      searchQuery: '',
-      hasAccounts: true
+      searchQuery: "",
+      hasAccounts: true,
     };
   },
   methods: {
@@ -80,7 +102,7 @@ export default {
       }
     },
     nextPage() {
-      if (this.displayedAccounts.length>0) {
+      if (this.displayedAccounts.length > 0) {
         this.currentPage++;
         this.fetchAccounts();
       }
@@ -99,18 +121,18 @@ export default {
       const params = { limit, offset, searchstrings };
 
       axios
-          .get(url, { params })
-          .then(response => {
-            this.accounts = response.data;
-          })
-          .catch(error => {
-            console.error('Error retrieving accounts:', error);
-          });
+        .get(url, { params })
+        .then((response) => {
+          this.accounts = response.data;
+        })
+        .catch((error) => {
+          console.error("Error retrieving accounts:", error);
+        });
     },
     search() {
       this.currentPage = 1;
       this.fetchAccounts();
-    }
+    },
   },
   computed: {
     displayedAccounts() {
@@ -119,7 +141,7 @@ export default {
   },
   mounted() {
     this.fetchAccounts();
-  }
+  },
 };
 </script>
 
@@ -138,13 +160,13 @@ export default {
   color: black;
 }
 
-.top-of-user-account-overview{
+.top-of-user-account-overview {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.pagination{
+.pagination {
   margin-left: 40px;
 }
 
