@@ -51,14 +51,21 @@
                 id="daily-limit"
                 class="form-control"
               />
-              
             </div>
-            
           </div>
-          
+
           <div class="update-button">
-                <button @click="updateUser" class="update-btn">Update User</button>
-              </div>
+            <button @click="this.$router.push(`/users`)" class="update-btn">
+              Update User
+            </button>
+            <button
+              @click="this.$router.push(`users/${this.user.UserID}`)"
+              class="update-btn"
+              id="cancel-btn"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -174,12 +181,14 @@ export default {
   border-radius: 4px;
 }
 
-.update-button{
+.update-button {
+  display: flex;
+  justify-content: center;
   margin-top: 10px;
-  margin-left: 22%;
+  
 }
 
-.update-btn{
+.update-btn {
   display: inline-block;
   position: relative;
   background-color: #6f00ff;
@@ -213,5 +222,14 @@ export default {
 .update-btn:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+#cancel-btn {
+  margin-left: 5%;
+  background-color: #ff0000;
+}
+
+#cancel-btn:hover{
+  background-color: #ff000094;
 }
 </style>

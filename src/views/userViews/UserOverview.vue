@@ -33,11 +33,14 @@
           <div id="user-avatar">
             <img src="/src/assets/images/logo-redbank.png" alt="Red Bank Logo" />
             <div id="edit-button">
-            <h2 id="h2-edit">Edit a user</h2>
-            <button id="edit-user-button" @click="this.$router.push(`/users/${user.UserID}/edit`)">
-              Click here
-            </button>
-          </div>
+              <h2 id="h2-edit">Edit a user</h2>
+              <button
+                id="edit-user-button"
+                @click="this.$router.push(`/users/${user.UserID}/edit`)"
+              >
+                Click here
+              </button>
+            </div>
           </div>
         </div>
 
@@ -212,6 +215,7 @@ export default {
 }
 
 .user-info {
+  /*   */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -360,7 +364,7 @@ td {
   border-bottom: 1px solid #ccc;
 }
 
-#edit-button{
+#edit-button {
   margin-top: 5%;
   margin-left: 50%;
   padding-top: 3%;
@@ -369,7 +373,7 @@ td {
   width: 45%;
 }
 
-#edit-user-button{
+#edit-user-button {
   width: 60%;
   background-color: #6f00ff;
   color: #ffffff;
