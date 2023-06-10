@@ -76,6 +76,8 @@
 import Header from "@/views/generalViews/Header.vue";
 import axios from "axios";
 
+const token = sessionStorage.getItem("token");
+
 export default {
   name: "EditUser",
   components: {
@@ -98,7 +100,11 @@ export default {
       const userId = this.$route.params.userId;
       const url = `http://localhost:8080/users/${userId}`;
       axios
-        .get(url)
+        .get(url, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
         .then((response) => {
           this.user = response.data;
         })
@@ -121,7 +127,11 @@ export default {
 
       console.log("Updating user:", updateUserDTO);
       axios
-        .put(url, updateUserDTO)
+        .put(url, updateUserDTO, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
         .then((response) => {
           console.log("User updated successfully:", response.data);
           this.$router.push(`/users`);

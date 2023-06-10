@@ -55,6 +55,8 @@
 import Header from "@/views/generalViews/Header.vue";
 import axios from "axios";
 
+const token = sessionStorage.getItem("token");
+
 export default {
   name: "CreateUser",
   components: {
@@ -68,7 +70,7 @@ export default {
         email: "",
         role: "User",
         transactionLimit: 1000,
-        dailyLimit: 250,
+        dailyLimit: 2000,
       },
     };
   },
@@ -85,7 +87,11 @@ export default {
       };
      console.log(createUserDTO);
       axios
-        .post("http://localhost:8080/users", createUserDTO)
+        .post("http://localhost:8080/users", createUserDTO, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
         .then((response) => {
           console.log("User created:", response.data);
           this.$router.push("/users");

@@ -30,27 +30,13 @@
               <h2>{{ user.DailyLimit }}</h2>
             </div>
           </div>
-          <div id="user-avatar">
+          <div id="user-logo">
             <img src="/src/assets/images/logo-redbank.png" alt="Red Bank Logo" />
-            <div  id="edit-button">
-              <h2 id="h2-edit">Edit a user</h2>
-              <button
-                id="edit-user-button"
-                @click="this.$router.push(`/users/${user.UserID}/edit`)"
-              >
-                Click here
-              </button>
-            </div>
-            <div  id="create-account-button">
-              <h2 id="h2-edit">Create an account</h2>
-              <button
-                id="add-account-button"
-                @click="this.$router.push(`/users/${user.UserID}/createAccount`)"
-              >
-                Click here
-              </button>
             </div>
           </div>
+          <div  class="user-info-button">
+              <button class="style-user-button" @click="editUser">Edit a user</button>
+              <button class="style-user-button" @click="createAccount">Create an account</button>
         </div>
 
         <div class="account-overview">
@@ -132,6 +118,8 @@ import Header from "@/views/generalViews/Header.vue";
 import axios from "axios";
 import AccountListItem from "@/components/accounts/AccountListItem.vue";
 
+const token = sessionStorage.getItem("token");
+
 export default {
   name: "SingleUser",
   components: {
@@ -151,10 +139,18 @@ export default {
     };
   },
   methods: {
+    editUser() {
+      this.$router.push(`/users/${this.userID}/edit`);
+    },
+    createAccount() {
+      this.$router.push(`/users/${this.userID}/createAccount`);
+    },
     fetchUser() {
       const url = `http://localhost:8080/users/${this.userID}`;
       axios
-        .get(url)
+        .get(url, { headers: {
+            Authorization: `Bearer ${token}`,
+          },})
         .then((response) => {
           this.user = response.data;
           this.fetchAccounts();
@@ -187,7 +183,9 @@ export default {
       const url = `http://localhost:8080/accounts/user/${this.userID}/accounts`;
       const params = { limit, offset, searchstrings };
       axios
-        .get(url, { params })
+        .get(url, { params, headers: {
+            Authorization: `Bearer ${token}`,
+          }, })
         .then((response) => {
           this.accounts = response.data;
           this.displayedAccounts = this.accounts.slice(0, this.itemsPerPage); // Add this line to update the displayed accounts
@@ -243,8 +241,7 @@ export default {
   font-weight: bold;
 }
 
-#user-avatar img {
-  margin-left: 150px;
+#user-logo img {
   width: 200px;
   height: 200px;
 }
@@ -372,20 +369,48 @@ td {
   border-bottom: 1px solid #ccc;
 }
 
-#edit-button {
-  margin-top: 5%;
-  
-  padding-top: 3%;
-  border-top: #ffffff dotted 2px;
-  text-align: center;
-  width: 45%;
+.user-info-button{
+  margin-top: 20px;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-#edit-btn {
-  width: 60%;
-  background-color: #6f00ff;
-  color: #ffffff;
-  border: #6f00ff solid 1px;
-  border-radius: 5px;
+.style-user-button {
+  display: inline-block;
+  position: relative;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: none;
+  box-shadow: none;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.style-user-button:hover,
+.style-user-button:active {
+  background-color: transparent;
+}
+
+.style-user-button::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.style-user-button:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 </style>
