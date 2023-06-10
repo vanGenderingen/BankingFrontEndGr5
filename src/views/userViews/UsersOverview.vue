@@ -115,8 +115,15 @@ export default {
       const url = `http://localhost:8080/users`;
       const params = { limit, offset, searchstrings };
 
+      const token = sessionStorage.getItem("token");
+
       axios
-        .get(url, { params })
+        .get(url, {
+          params,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           this.users = response.data;
           this.updateDisplayedUsers();
