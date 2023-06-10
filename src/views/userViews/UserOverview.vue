@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title="`User: ${user.FirstName + user.LastName}`"></Header>
+    <Header :title="`User: ${user.FirstName} ${user.LastName}`"></Header>
     <div class="container">
       <div class="content">
         <div class="user-info">
@@ -32,11 +32,12 @@
           </div>
           <div id="user-avatar">
             <img src="/src/assets/images/logo-redbank.png" alt="Red Bank Logo" />
-
-            <h2 id="h2-create">Edit a user</h2>
-            <button id="create-user-button" @click="this.$router.push(`/users/${user.UserID}/edit`)">
+            <div id="edit-button">
+            <h2 id="h2-edit">Edit a user</h2>
+            <button id="edit-user-button" @click="this.$router.push(`/users/${user.UserID}/edit`)">
               Click here
             </button>
+          </div>
           </div>
         </div>
 
@@ -357,5 +358,22 @@ td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ccc;
+}
+
+#edit-button{
+  margin-top: 5%;
+  margin-left: 50%;
+  padding-top: 3%;
+  border-top: #ffffff dotted 2px;
+  text-align: center;
+  width: 45%;
+}
+
+#edit-user-button{
+  width: 60%;
+  background-color: #6f00ff;
+  color: #ffffff;
+  border: #6f00ff solid 1px;
+  border-radius: 5px;
 }
 </style>

@@ -66,7 +66,6 @@ export default {
         firstName: "",
         lastName: "",
         email: "",
-        password: "",
         role: "User",
         transactionLimit: 1000,
         dailyLimit: 250,
@@ -84,7 +83,7 @@ export default {
         TransactionLimit: this.user.transactionLimit,
         DailyLimit: this.user.dailyLimit,
       };
-
+     console.log(createUserDTO);
       axios
         .post("http://localhost:8080/users", createUserDTO)
         .then((response) => {
