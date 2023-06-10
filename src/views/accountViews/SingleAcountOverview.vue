@@ -17,6 +17,10 @@
           <img src="/src/assets/images/logo-redbank.png" alt="Logo" />
         </div>
       </div>
+      <div class="account-info-buttons">
+        <button class="account-info-button-createTransaction" v-if="userRole === 'ROLE_USER' || userRole === 'ROLE_EMPLOYEE'" @click="createTransaction">Create a new Transaction</button>
+        <button class="account-info-button-editAccount" v-if="userRole === 'ROLE_EMPLOYEE'" @click="editAccount">Edit this Account</button>
+      </div>
       <div class="transaction-overview">
         <div class="pagination-and-amount-and-search">
           <div class="pagination-and-amount">
@@ -70,6 +74,7 @@
 import Header from "@/views/generalViews/Header.vue";
 import axios from "axios";
 import TransactionListItem from "@/components/accounts/TransactionListItem.vue";
+import VueJwtDecode from "vue-jwt-decode";
 
 export default {
   name: "SingleAccount",
@@ -88,6 +93,8 @@ export default {
       searchQuery: "",
       transactions: [],
       displayedTransactions: [],
+
+      userRole: 'ROLE_USER'
     };
   },
   methods: {
@@ -155,10 +162,32 @@ export default {
       this.currentPage = 1;
       this.updateDisplayedTransactions();
     },
+    createTransaction() {
+      // Perform any necessary checks or actions before navigating to the create transaction page
+      // Navigate to the create transaction page
+      this.$router.push('/transactions/${this.account.AccountID}/createAccount');
+      },
+    editAccount() {
+      this.$router.push(`/users/${this.account.AccountID}/editAccount`);
+      },
   },
   mounted() {
     this.fetchAccount();
     this.fetchTransactions();
+
+    let token = sessionStorage.getItem('token');
+    try {
+      const decodedToken = VueJwtDecode.decode(token);
+      const hasEmployeeRole = decodedToken.auth.some(auth => auth.role === 'ROLE_EMPLOYEE');
+
+      if (hasEmployeeRole) {
+        this.userRole = 'ROLE_EMPLOYEE';
+      } else {
+        this.userRole = 'ROLE_USER';
+      }
+    } catch (err) {
+      console.log('Token is null: ', err);
+    }
   },
   computed: {
     displayedTransactions(){
@@ -206,11 +235,91 @@ export default {
   height: 200px;
 }
 
+.account-info-buttons{
+  margin-top: 20px;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.account-info-button-createTransaction {
+  display: inline-block;
+  position: relative;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: none;
+  box-shadow: none;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.account-info-button-createTransaction:hover,
+.account-info-button-createTransaction:active {
+  background-color: transparent;
+}
+
+.account-info-button-createTransaction::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.account-info-button-createTransaction:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.account-info-button-editAccount {
+  display: inline-block;
+  position: relative;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: none;
+  box-shadow: none;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.account-info-button-editAccount:hover,
+.account-info-button-editAccount:active {
+  background-color: transparent;
+}
+
+.account-info-button-editAccount::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.account-info-button-editAccount:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 .transaction-table {
   color: white;
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
 }
 
 .transaction-overview {
@@ -220,7 +329,6 @@ export default {
 }
 
 .pagination-and-amount-and-search {
-  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
