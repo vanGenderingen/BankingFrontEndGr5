@@ -39,15 +39,6 @@
               <button @click="nextPage" class="pagination-button">Next Page</button>
             </div>
           </div>
-          <div class="search-bar">
-            <input
-                type="text"
-                v-model="searchQuery"
-                @input="search"
-                placeholder="Search"
-                class="search-input"
-            />
-          </div>
         </div>
         <table class="transaction-table">
           <thead>
@@ -136,11 +127,12 @@ export default {
     },
     fetchTransactions() {
       const limit = this.itemsPerPage;
-      const offset = this.currentPage - 1;
-      const searchstrings = this.searchQuery || undefined;
+      const offset = (this.currentPage - 1) * this.itemsPerPage;
+      const to = this.account.IBAN;
+      const from = this.account.IBAN;
 
-      const url = `http://localhost:8080/transactions?IBAN=${this.IBAN}`;
-      const params = { limit, offset, searchstrings };
+      const url = `http://localhost:8080/transactions`;
+      const params = { limit, offset, to, from };
 
       const token = sessionStorage.getItem('token');
 
@@ -154,7 +146,7 @@ export default {
           .then(response => {
             this.transactions = response.data;
           })
-          .catch((error) => {
+          .catch(error => {
             console.error("Error retrieving transactions:", error);
           });
     },
