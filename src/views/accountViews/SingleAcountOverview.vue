@@ -18,8 +18,8 @@
         </div>
       </div>
       <div class="account-info-buttons">
-        <button class="account-info-button" v-if="userRole === 'ROLE_USER' || userRole === 'ROLE_EMPLOYEE'">Create a new Transaction</button>
-        <button class="account-info-button" v-if="userRole === 'ROLE_EMPLOYEE'">Edit this Account</button>
+        <button class="account-info-button-createTransaction" v-if="userRole === 'ROLE_USER' || userRole === 'ROLE_EMPLOYEE'" @click="createTransaction">Create a new Transaction</button>
+        <button class="account-info-button-editAccount" v-if="userRole === 'ROLE_EMPLOYEE'" @click="editAccount">Edit this Account</button>
       </div>
       <div class="transaction-overview">
         <div class="pagination-and-amount-and-search">
@@ -162,6 +162,14 @@ export default {
       this.currentPage = 1;
       this.updateDisplayedTransactions();
     },
+    createTransaction() {
+      // Perform any necessary checks or actions before navigating to the create transaction page
+      // Navigate to the create transaction page
+      this.$router.push('/transactions/${this.account.AccountID}/createAccount');
+      },
+    editAccount() {
+      this.$router.push(`/users/${this.account.AccountID}/editAccount`);
+      },
   },
   mounted() {
     this.fetchAccount();
@@ -236,7 +244,7 @@ export default {
   width: 100%;
 }
 
-.account-info-button {
+.account-info-button-createTransaction {
   display: inline-block;
   position: relative;
   background-color: transparent;
@@ -249,12 +257,12 @@ export default {
   margin-right: 10px;
 }
 
-.account-info-button:hover,
-.account-info-button:active {
+.account-info-button-createTransaction:hover,
+.account-info-button-createTransaction:active {
   background-color: transparent;
 }
 
-.account-info-button::after {
+.account-info-button-createTransaction::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -267,7 +275,43 @@ export default {
   transition: transform 0.25s ease-out;
 }
 
-.account-info-button:hover::after {
+.account-info-button-createTransaction:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.account-info-button-editAccount {
+  display: inline-block;
+  position: relative;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: none;
+  box-shadow: none;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.account-info-button-editAccount:hover,
+.account-info-button-editAccount:active {
+  background-color: transparent;
+}
+
+.account-info-button-editAccount::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.account-info-button-editAccount:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
