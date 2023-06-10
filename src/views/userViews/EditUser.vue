@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title="`Edit User: ${user.FirstName + user.LastName}`"></Header>
+    <Header :title="`Edit User: ${user.FirstName +  user.LastName}`"></Header>
     <div class="container">
       <div class="content">
         <div class="user-info">
@@ -28,21 +28,12 @@
               <input v-model="user.Email" type="email" id="email" class="form-control" />
             </div>
             <div class="form-group">
-              <label for="role">Role:</label>
-              <select v-model="user.Role" id="role" class="form-control">
-                <option value="User">User</option>
-                <option value="Employee">Employee</option>
-                <!-- Add more role options if needed -->
-              </select>
+              <label for="email">Password:</label>
+              <input v-model="user.Password" type="password" id="password" class="form-control" />
             </div>
             <div class="form-group">
               <label for="active">Active:</label>
-              <input
-                v-model="user.Active"
-                type="checkbox"
-                id="active"
-                class="form-boxl"
-              />
+              <input v-model="user.Active" type="checkbox" id="active" class="form-box">
             </div>
             <div class="form-group">
               <label for="transaction-limit">Transaction Limit:</label>
@@ -86,14 +77,12 @@ export default {
     return {
       userID: this.$route.params.userId,
       user: {
-        FirstName: "",
-        LastName: "",
-        Email: "",
-        Password: "",
-        Active: false,
-        TransactionLimit: 0,
-        DailyLimit: 0,
-        Role: "User", // Set the default role value here
+        firstName: "",
+        lastName: "",
+        email: "",
+        role: "User",
+        transactionLimit: 1000,
+        dailyLimit: 250,
       },
     };
   },
