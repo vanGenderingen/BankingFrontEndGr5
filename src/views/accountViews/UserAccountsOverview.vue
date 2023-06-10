@@ -120,9 +120,16 @@ export default {
       const url = `http://localhost:8080/accounts/user/${userId}/accounts`;
       const params = { limit, offset, searchstrings };
 
+      const token = sessionStorage.getItem('token');
+
       axios
-        .get(url, { params })
-        .then((response) => {
+          .get(url, {
+            params,
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => {
           this.accounts = response.data;
         })
         .catch((error) => {

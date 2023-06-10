@@ -93,13 +93,20 @@ export default {
   methods: {
     fetchAccount() {
       const url = `http://localhost:8080/accounts/${this.accountID}`;
+
+      const token = sessionStorage.getItem('token');
+
       axios
-          .get(url)
-          .then((response) => {
+          .get(url, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+          .then(response => {
             this.account = response.data;
             this.fetchTransactions();
           })
-          .catch((error) => {
+          .catch(error => {
             console.error("Error retrieving account:", error);
           });
     },
@@ -122,13 +129,21 @@ export default {
     fetchTransactions() {
       const limit = this.itemsPerPage;
       const offset = this.currentPage - 1;
-      const searchstrings = this.searchQuery | undefined;
+      const searchstrings = this.searchQuery || undefined;
 
       const url = `http://localhost:8080/transactions?IBAN=${this.IBAN}`;
       const params = { limit, offset, searchstrings };
+
+      const token = sessionStorage.getItem('token');
+
       axios
-          .get(url, { params })
-          .then((response) => {
+          .get(url, {
+            params,
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+          .then(response => {
             this.transactions = response.data;
           })
           .catch((error) => {
