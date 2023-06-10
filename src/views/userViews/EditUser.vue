@@ -55,11 +55,11 @@
           </div>
 
           <div class="update-button">
-            <button @click="this.$router.push(`/users`)" class="update-btn">
+            <button @click="updateUser" class="update-btn">
               Update User
             </button>
             <button
-              @click="this.$router.push(`users/${this.user.UserID}`)"
+              @click="this.$router.push(`/users/${this.user.UserID}`)"
               class="update-btn"
               id="cancel-btn"
             >
@@ -124,7 +124,7 @@ export default {
         .put(url, updateUserDTO)
         .then((response) => {
           console.log("User updated successfully:", response.data);
-          // You can redirect to a different page or perform other actions here
+          this.$router.push(`/users`);
         })
         .catch((error) => {
           console.error("Error updating user:", error);

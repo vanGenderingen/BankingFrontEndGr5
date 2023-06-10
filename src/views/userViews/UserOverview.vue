@@ -3,7 +3,7 @@
     <Header :title="`User: ${user.FirstName} ${user.LastName}`"></Header>
     <div class="container">
       <div class="content">
-        <div class="user-info">
+        <div class="user-Info">
           <div class="user-details">
             <div class="label"><h2>Name:</h2></div>
             <div class="value">
@@ -32,11 +32,20 @@
           </div>
           <div id="user-avatar">
             <img src="/src/assets/images/logo-redbank.png" alt="Red Bank Logo" />
-            <div id="edit-button">
+            <div  id="edit-button">
               <h2 id="h2-edit">Edit a user</h2>
               <button
                 id="edit-user-button"
                 @click="this.$router.push(`/users/${user.UserID}/edit`)"
+              >
+                Click here
+              </button>
+            </div>
+            <div  id="create-account-button">
+              <h2 id="h2-edit">Create an account</h2>
+              <button
+                id="add-account-button"
+                @click="this.$router.push(`/users/${user.UserID}/createAccount`)"
               >
                 Click here
               </button>
@@ -214,8 +223,7 @@ export default {
   flex: 1;
 }
 
-.user-info {
-  /*   */
+.user-Info {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -366,14 +374,14 @@ td {
 
 #edit-button {
   margin-top: 5%;
-  margin-left: 50%;
+  
   padding-top: 3%;
   border-top: #ffffff dotted 2px;
   text-align: center;
   width: 45%;
 }
 
-#edit-user-button {
+#edit-btn {
   width: 60%;
   background-color: #6f00ff;
   color: #ffffff;
