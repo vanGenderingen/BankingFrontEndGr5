@@ -4,7 +4,7 @@
     <div class="container">
       <div class="content">
         <div class="account-info">
-          <div id="account-avatar">
+          <div id="bank-logo-account-put">
             <img src="/src/assets/images/logo-redbank.png" alt="Red Bank Logo" />
           </div>
           <div class="account-details">
@@ -18,7 +18,7 @@
               />
             </div>
             <div class="form-group">
-              <label for="Balance">Balance</label>
+              <label for="Balance">Balance:</label>
               <input
                   v-model="account.Balance"
                   type="number"
@@ -30,15 +30,15 @@
               <label for="MinBal">MinBal:</label>
               <input v-model="account.MinBal" type="number" id="MinBal" class="form-control" />
             </div>
-            <div class="Active">
-              <label class="custom-label" for="Active">Active:</label>
-              <input type="checkbox" id="Type" v-model="account.Active" class="custom-checkbox" />
+            <div class="form-group">
+              <label for="Active">Active:</label>
+              <input type="checkbox" id="Active" v-model="account.Active" class="custom-checkbox" />
             </div>
           </div>
 
           <div class="accounts-put-buttons">
-            <button @click="updateAccount" id="accounts-update-button" type="submit">Update Account</button>
-            <button @click="cancelUpdate" id="accounts-cancel-button" type="submit">Cancel</button>
+            <button @click="updateAccount" class="update-btn" id="accounts-update-button" type="submit">Update Account</button>
+            <button @click="cancelUpdate" class="update-btn" id="accounts-cancel-button" type="submit">Cancel</button>
           </div>
         </div>
       </div>
@@ -118,19 +118,20 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
-  width: calc(100% - 300px);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.content {
-  flex: 1;
-}
-
-.user-info {
+.account-info {
   display: grid;
   align-items: center;
   padding: 20px;
@@ -138,15 +139,22 @@ export default {
   border-radius: 5%;
 }
 
-#user-avatar img {
-  margin-left: 25%;
-  width: 150px;
-  height: 150px;
+#bank-logo-account-put {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.user-details {
+#bank-logo-account-put img {
+  margin-left: 200px;
+  margin-right: 200px;
+  width: 200px;
+  height: 200px;
+}
+
+.account-details {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 
@@ -161,11 +169,17 @@ export default {
   border-radius: 4px;
 }
 
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  margin-top: 3px;
+}
+
 .accounts-put-buttons {
   display: flex;
   justify-content: center;
   margin-top: 10px;
-
 }
 
 .update-btn {
@@ -204,12 +218,12 @@ export default {
   transform-origin: bottom left;
 }
 
-#cancel-btn {
+#accounts-cancel-button {
   margin-left: 5%;
   background-color: #ff0000;
 }
 
-#cancel-btn:hover{
+#accounts-cancel-button:hover {
   background-color: #ff000094;
 }
 </style>
