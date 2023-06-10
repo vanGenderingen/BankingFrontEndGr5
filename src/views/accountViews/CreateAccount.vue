@@ -49,16 +49,14 @@ export default {
         MinBal: this.user.MinBal
       };
 
-      // Reorder the properties
-      const reorderedDTO = {
-        UserID: createAccountDTO.UserID,
-        Name: createAccountDTO.Name,
-        Type: createAccountDTO.Type,
-        MinBal: createAccountDTO.MinBal
-      };
+      const token = sessionStorage.getItem('token');
 
       axios
-          .post('http://localhost:8080/accounts', reorderedDTO)
+          .post('http://localhost:8080/accounts', createAccountDTO, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
           .then(response => {
             console.log('Account created:', response.data);
             router.push(`/accounts/user/${this.$route.params.userId}/accounts`);
