@@ -1,4 +1,5 @@
 <template>
+  <MyComponent :key="navKey"/>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
@@ -33,15 +34,22 @@
 
 <script>
 import VueJwtDecode from 'vue-jwt-decode';
-
+import eventBus from "@/components/EventBus.vue";
 export default {
   name: "Navigation",
   data() {
     return {
       userRole: '',
+      loggedIn: false,
     }
   },
+  created() {
+    eventBus.on('login', () => {
+      this.loggedIn = true;
+    });
+  },
   mounted() {
+    //TODO: ONCE NEW LOGIN REFRESH TOKEN THATS HERE
     let token = sessionStorage.getItem('token');
     try {
       const decodedToken = VueJwtDecode.decode(token);

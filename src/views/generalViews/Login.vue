@@ -24,7 +24,8 @@
 import Header from "@/views/generalViews/Header.vue";
 import axios from 'axios';
 import VueJwtDecode from "vue-jwt-decode";
-
+import Navigation from "@/views/generalViews/Navigation.vue";
+import eventBus from "@/components/EventBus.vue";
 export default {
   name: "Login",
   components: {
@@ -59,7 +60,8 @@ export default {
             try {
               const decodedToken = VueJwtDecode.decode(token);
               const userID = decodedToken.sub;
-              this.$router.push(`/accounts/user/${userID}/accounts`);
+              // Emit the "login" event
+              eventBus.emit('login');              this.$router.push(`/accounts/user/${userID}/accounts`);
             } catch (err) {
               console.log('Token is null: ', err);
             }

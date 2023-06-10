@@ -88,28 +88,34 @@ export default {
   data() {
     return {
       users: [],
-      displayedUsers: [],
       currentPage: 1,
       itemsPerPage: 10,
       availableItemsPerPage: [10, 20],
       searchQuery: "",
+      hasUsers: true,
+
     };
   },
-  computed: {
-    totalUsers() {
-      return this.users.length;
-    },
-    totalPages() {
-      return Math.ceil(this.totalUsers / this.itemsPerPage);
-    },
-    hasMoreUsers() {
-      return this.currentPage < this.totalPages;
-    },
-  },
   methods: {
+    previousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.updateDisplayedUsers();
+      }
+    },
+    nextPage() {
+      if (this.displayedUsers.length>0) {
+        this.currentPage++;
+        this.fetchUsers();
+      }
+    },
+    updateDisplayedUsers() {
+      this.currentPage = 1;
+      this.fetchUsers();
+    },
     fetchUsers() {
       const limit = this.itemsPerPage;
-      const offset = (this.currentPage - 1) * this.itemsPerPage;
+      const offset = this.currentPage - 1;
       const searchstrings = this.searchQuery || undefined;
 
       const url = `http://localhost:8080/users`;
@@ -118,40 +124,28 @@ export default {
       const token = sessionStorage.getItem("token");
 
       axios
-        .get(url, {
-          params,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          this.users = response.data;
-          this.updateDisplayedUsers();
-        })
-        .catch((error) => {
-          console.error("Error retrieving users:", error);
-        });
+          .get(url, {
+            params,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            this.users = response.data;
+          })
+          .catch((error) => {
+            console.error("Error retrieving users:", error);
+          });
     },
     search() {
       this.currentPage = 1;
       this.fetchUsers();
     },
-    updateDisplayedUsers() {
-      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-      this.displayedUsers = this.users.slice(startIndex, startIndex + this.itemsPerPage);
-    },
-    previousPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        this.updateDisplayedUsers();
-      }
-    },
-    nextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-        this.updateDisplayedUsers();
-      }
-    },
+  },
+  computed: {
+    displayedUsers(){
+      return this.users.slice(0, this.itemsPerPage);
+    }
   },
   mounted() {
     this.fetchUsers();

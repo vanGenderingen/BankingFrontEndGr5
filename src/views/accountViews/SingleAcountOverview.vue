@@ -127,12 +127,11 @@ export default {
     },
     fetchTransactions() {
       const limit = this.itemsPerPage;
-      const offset = (this.currentPage - 1) * this.itemsPerPage;
-      const to = this.account.IBAN;
-      const from = this.account.IBAN;
+      const offset = this.currentPage - 1;
+      const accountID = this.account.accountID;
 
       const url = `http://localhost:8080/transactions`;
-      const params = { limit, offset, to, from };
+      const params = { limit, offset, accountID };
 
       const token = sessionStorage.getItem('token');
 
