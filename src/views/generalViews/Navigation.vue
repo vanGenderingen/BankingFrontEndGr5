@@ -12,8 +12,8 @@
           <router-link to="/products" class="nav-link" active-class="active">Products</router-link>
         </li>
         <li class="nav-item"  v-if="userRole === 'ROLE_USER' || userRole === 'ROLE_EMPLOYEE'">
-          <!-- add a router link to the user's accounts page (don't use the a tag!) -->
-          <router-link :to="`/accounts/user/${userId}/accounts`" class="nav-link" active-class="active">My Accounts</router-link>
+          <!-- Add a router link to the user's accounts page (don't use the a tag!) -->
+          <router-link :to="`/accounts/user/${userID}/accounts`" class="nav-link" active-class="active" @click="updateComponent">My Accounts</router-link>
         </li>
         <li class="nav-item" v-if="userRole === 'ROLE_EMPLOYEE'">
           <!-- add a router link to the all users page (don't use the a tag!) -->
@@ -40,7 +40,10 @@ export default {
   data() {
     return {
       userRole: '',
+      userID: '',
       loggedIn: false,
+
+      navKey: 0,
     }
   },
   created() {
@@ -48,19 +51,23 @@ export default {
       this.loggedIn = true;
     });
   },
+  methods: {
+    updateComponent() {
+      this.navKey++;
+    },
+  },
   mounted() {
     //TODO: ONCE NEW LOGIN REFRESH TOKEN THATS HERE
     let token = sessionStorage.getItem('token');
     try {
       const decodedToken = VueJwtDecode.decode(token);
       const hasEmployeeRole = decodedToken.auth.some(auth => auth.role === 'ROLE_EMPLOYEE');
+      this.userID = decodedToken.sub;
 
       if (hasEmployeeRole) {
         this.userRole = 'ROLE_EMPLOYEE';
-        this.userId = decodedToken.sub; // Set the userId property to the decoded user ID
       } else {
         this.userRole = 'ROLE_USER';
-        this.userId = decodedToken.sub; // Set the userId property to the decoded user ID
       }
     } catch (err) {
       console.log('Token is null: ', err);
