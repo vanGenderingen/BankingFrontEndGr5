@@ -24,7 +24,7 @@ const routes = [
   { path: '/accounts/user/:userId/accounts', component: UserAccountsOverview },
   { path: '/users/create', component: CreateUser },
   { path: '/users/:userId', component: UserOverview },
-  { path: '/users/edit', component: EditUser },
+  { path: '/users/:userId/edit', component: EditUser },
 ];
 
 const router = createRouter({

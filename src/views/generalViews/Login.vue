@@ -68,6 +68,7 @@ export default {
             console.error('Error logging in:', error);
             // Handle the login error, such as displaying an error message
           });
+
     },
   },
 };
