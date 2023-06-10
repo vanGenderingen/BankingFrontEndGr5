@@ -5,7 +5,7 @@
       <div class="text-block block1">
         <h2>About Red Bank</h2>
         <p>Welcome to Red Bank, the banking application inspired by the delightful flavors of Red Band candy! At Red Bank, we bring a unique blend of sweetness and reliability to your financial journey. Just like the iconic candy brand, we strive to create an experience that is enjoyable and satisfying. With a team of dedicated professionals, we are committed to providing exceptional banking services tailored to your needs. Join us and discover the perfect harmony of confectionery delight and financial expertise.</p>
-        <button class="centered-button">Get Started Now</button>
+        <button class="centered-button" @click="this.$router.push('/login')">Get Started Now</button>
       </div>
       <div class="text-block block2">
         <h2>Our Competitive rates</h2>
