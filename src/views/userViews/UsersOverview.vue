@@ -29,7 +29,13 @@
               Previous Page
             </button>
             <div class="pagination-info">Current Page: {{ currentPage }}</div>
-            <button @click="nextPage" class="pagination-button">Next Page</button>
+            <button
+              @click="nextPage"
+              :disabled="hasMoreUsers"
+              class="pagination-button"
+            >
+              Next Page
+            </button>
           </div>
         </div>
         <div class="search-bar">
@@ -37,7 +43,7 @@
             type="text"
             v-model="searchQuery"
             @input="search"
-            placeholder="Search for a user"
+            placeholder="Search by Email"
             class="search-input"
           />
         </div>
@@ -106,16 +112,25 @@ export default {
     },
   },
   methods: {
-    createUser() {
-      this.$router.push("/users/create");
+    previousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.fetchUsers();
+      }
+    },
+    nextPage() {
+      if (this.displayedAccounts.length > 0) {
+        this.currentPage++;
+        this.fetchUsers();
+      }
     },
     fetchUsers() {
       const limit = this.itemsPerPage;
-      const offset = (this.currentPage - 1) * this.itemsPerPage;
+      const offset = this.currentPage - 1;
       const searchstrings = this.searchQuery || undefined;
 
       const url = `http://localhost:8080/users`;
-      const params = { limit, offset, searchstrings };
+      const params = { limit, offset, searchstrings};
 
       const token = sessionStorage.getItem("token");
 
@@ -142,18 +157,9 @@ export default {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       this.displayedUsers = this.users.slice(startIndex, startIndex + this.itemsPerPage);
     },
-    previousPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        this.updateDisplayedUsers();
-      }
-    },
-    nextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-        this.updateDisplayedUsers();
-      }
-    },
+    createUser() {
+      this.$router.push("/users/create");
+    }
   },
   mounted() {
     this.fetchUsers();
@@ -302,7 +308,7 @@ export default {
 
 .search-bar {
   display: flex;
-  margin-left: 10px;
+  margin-left: 10x;
   width: 20%;
   border-bottom: 1px solid #ddd;
 }
