@@ -30,9 +30,9 @@
               <label for="email">Email:</label>
               <input v-model="user.Email" type="email" id="email" class="form-control" />
             </div>
-            <div class="form-group">
+            <div class="form-group" id="form-active">
               <label for="active">Active:</label>
-              <input v-model="user.Active" type="checkbox" id="active" class="form-box" />
+              <input v-model="user.Active" type="checkbox" id="active-check" class="form-box" />
             </div>
             <div class="form-group">
               <label for="transaction-limit">Transaction Limit:</label>
@@ -149,6 +149,26 @@ export default {
 </script>
 
 <style>
+#form-active {
+  display: grid;
+
+}
+#active-check {
+  width: 20px;
+ 
+  appearance: none;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: background-color 0.3s, border-color 0.3s;
+  background-color: white;
+}
+
+#active-check:checked {
+  background-color: #6f00ff;
+  border-color: #ffffff;
+}
+
 .container {
   width: calc(100% - 300px);
   display: flex;

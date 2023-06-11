@@ -15,7 +15,7 @@
             </div>
             <div class="label"><h2>Roles:</h2></div>
             <div class="value">
-              <h2>{{ user.Roles }}</h2>
+              <h2>{{ getRoleLabel(user.roles) }}</h2>
             </div>
             <div class="label"><h2>Active:</h2></div>
             <div class="value">
@@ -139,6 +139,21 @@ export default {
     };
   },
   methods: {
+    getRoleLabel(roles) {
+      if (Array.isArray(roles)) {
+        const combined = roles.join(", "); // Combines the roles into a string separated by commas
+
+        if(roles.includes("ROLE_EMPLOYEE")){
+          return "Employee";
+        }
+        else if(roles.includes("ROLE_USER")){
+          return "User";
+        }
+      }
+      else {
+        return "Unspecified";
+      }
+    },
     editUser() {
       this.$router.push(`/users/${this.userID}/edit`);
     },

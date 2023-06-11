@@ -37,7 +37,7 @@
             type="text"
             v-model="searchQuery"
             @input="search"
-            placeholder="Search for a user"
+            placeholder="Search by email"
             class="search-input"
           />
         </div>
@@ -65,9 +65,8 @@
         </tbody>
       </table>
       <div class="createUser">
-        <h2 id="h2-create">Create a user</h2>
-        <button id="create-user-button" @click="$router.push('/users/create')">
-          Click here
+        <button class="#create-user-button" id="create-user-button" @click=createUser>
+          Click here to create a new user
         </button>
       </div>
     </div>
@@ -97,6 +96,9 @@ export default {
     };
   },
   methods: {
+    createUser() {
+      this.$router.push("/users/create");
+    },
     previousPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
@@ -156,29 +158,56 @@ export default {
 <style scoped>
 .createUser {
   display: grid;
-  width: 50%;
   align-items: center;
-  margin-left: 6%;
+  font-size: large;
   margin-top: 20px;
-  margin-bottom: 20px;
 }
 
-#h2-create {
-  font-weight: 700;
-  color: #ddd;
+.create-user-button{
+  margin-top: 20px;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 #create-user-button {
-  background-color: #6f00ff;
-  width: 10%;
-  color: #fff;
-  text-align: center;
-  margin-left: 5%;
-  border: 1px solid #6f00ff;
-  border-radius: 5px;
+  display: inline-block;
+  position: relative;
+  background-color: transparent;
+  color: white;
+  border: none;
   cursor: pointer;
+  transition: none;
+  box-shadow: none;
+  margin-bottom: 2px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
+#create-user-button:hover,
+#create-user-button:active {
+  background-color: transparent;
+}
+
+#create-user-button::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+#create-user-button:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
 .user-table {
   width: calc(100% - 300px); /* Adjust the value based on your requirements */
   margin: 0 auto;
@@ -267,8 +296,9 @@ export default {
 .search-bar {
   display: flex;
   margin-left: 10px;
-  width: 20%;
+  width: 15%;
   border-bottom: 1px solid #ddd;
+  padding-right: 5%;
 }
 
 .search-input {
