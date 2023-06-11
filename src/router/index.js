@@ -41,4 +41,45 @@ const router = createRouter({
   routes
 });
 
+// Navigation guard for input sanitization
+router.beforeEach((to, from, next) => {
+  // Sanitize path parameters
+  Object.keys(to.params).forEach(param => {
+    to.params[param] = removeUnwantedChars(to.params[param]);
+    to.params[param] = escSpecialChars(to.params[param]);
+  });
+
+  // Sanitize query parameters
+  Object.keys(to.query).forEach(queryParam => {
+    to.query[queryParam] = removeUnwantedChars(to.query[queryParam]);
+    to.query[queryParam] = escSpecialChars(to.query[queryParam]);
+  });
+
+  next();
+});
+
+// Function to sanitize input values
+function removeUnwantedChars(value) {
+  const uuidPattern = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/;
+  if (uuidPattern.test(value)) {
+    return value; // Skip sanitization for UUID values
+  }
+  // Remove leading/trailing spaces
+  value = value.trim();
+  // Remove specific special characters
+  value = value.replace(/[^a-zA-Z0-9]/g, '');
+
+  return value;
+}
+
+function escSpecialChars(value) {
+  // Escape HTML entities
+  value = value.replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+
+  return value;
+}
 export default router;
