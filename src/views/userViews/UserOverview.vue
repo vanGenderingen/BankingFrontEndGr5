@@ -15,7 +15,7 @@
             </div>
             <div class="label"><h2>Roles:</h2></div>
             <div class="value">
-              <h2>{{ user.Roles }}</h2>
+              <h2>{{ getRoleLabel(user.roles) }}</h2>
             </div>
             <div class="label"><h2>Active:</h2></div>
             <div class="value">
@@ -132,13 +132,28 @@ export default {
       user: {},
       currentPage: 1,
       itemsPerPage: 10,
-      availableItemsPerPage: [10, 20, 30],
+      availableItemsPerPage: [10, 20],
       searchQuery: "",
       accounts: [],
       displayedAccounts: [],
     };
   },
   methods: {
+    getRoleLabel(roles) {
+      if (Array.isArray(roles)) {
+        const combined = roles.join(", "); // Combines the roles into a string separated by commas
+
+        if(roles.includes("ROLE_EMPLOYEE")){
+          return "Employee";
+        }
+        else if(roles.includes("ROLE_USER")){
+          return "User";
+        }
+      }
+      else {
+        return "Unspecified";
+      }
+    },
     editUser() {
       this.$router.push(`/users/${this.userID}/edit`);
     },
@@ -159,6 +174,10 @@ export default {
           console.error("Error retrieving user:", error);
         });
     },
+    search() {
+      this.currentPage = 1;
+      this.fetchAccounts();
+    },
     previousPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
@@ -166,7 +185,7 @@ export default {
       }
     },
     nextPage() {
-      if (this.hasMoreAccounts) {
+      if (this.displayedAccounts.length > 0) {
         this.currentPage++;
         this.fetchAccounts();
       }
@@ -177,8 +196,8 @@ export default {
     },
     fetchAccounts() {
       const limit = this.itemsPerPage;
-      const offset = (this.currentPage - 1) * this.itemsPerPage;
-      const searchstrings = this.searchQuery ? this.searchQuery.split(" ") : undefined;
+      const offset = this.currentPage - 1;
+      const searchstrings = this.searchQuery || undefined;
 
       const url = `http://localhost:8080/accounts/user/${this.userID}/accounts`;
       const params = { limit, offset, searchstrings };
@@ -197,6 +216,7 @@ export default {
   },
   mounted() {
     this.fetchUser();
+    this.fetchAccounts();
   },
   computed: {
     displayedAccounts() {

@@ -24,9 +24,7 @@
           <label for="role">Role:</label>
           <select type="text" id="role" v-model="user.role" required>
             <option value="User">User</option>
-            <!-- Update value to "USER" -->
             <option value="Employee">Employee</option>
-            <!-- Update value to "EMPLOYEE" -->
           </select>
         </div>
         <div class="form-group">
@@ -81,7 +79,7 @@ export default {
         LastName: this.user.lastName,
         Email: this.user.email,
         Password: this.user.password,
-        Roles: this.user.role,
+        roles: ["ROLE_" + this.user.role.toUpperCase()], // Add "ROLE_" prefix and convert to uppercase
         TransactionLimit: this.user.transactionLimit,
         DailyLimit: this.user.dailyLimit,
       };

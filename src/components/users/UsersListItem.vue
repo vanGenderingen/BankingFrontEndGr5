@@ -4,7 +4,7 @@
     <td class="user-cell">{{ user.FirstName }}</td>
     <td class="user-cell">{{ user.LastName }}</td>
     <td class="user-cell">{{ user.Email }}</td>
-    <td class="user-cell">{{ user.Role }}</td>
+    <td class="user-cell">{{ getRoleLabel(user.roles) }}</td>
     <td class="user-cell">{{ user.Active ? "Active" : "Inactive" }}</td>
     <td class="user-cell">{{ user.TransactionLimit }}</td>
     <td class="user-cell">{{ user.DailyLimit }}</td>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+
 export default {
   name: "UsersListItem",
   props: {
@@ -23,6 +24,21 @@ export default {
   methods: {
     navigateToUser() {
       this.$router.push(`users/${this.user.UserID}`);
+    },
+    getRoleLabel(roles) {
+      if (Array.isArray(roles)) {
+        const combined = roles.join(", "); // Combines the roles into a string separated by commas
+
+        if(roles.includes("ROLE_EMPLOYEE")){
+          return "Employee";
+        }
+        else if(roles.includes("ROLE_USER")){
+          return "User";
+        }
+      }
+      else {
+        return "Unspecified";
+      }
     },
   },
 };
