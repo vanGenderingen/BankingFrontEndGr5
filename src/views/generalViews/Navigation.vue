@@ -15,10 +15,6 @@
           <!-- Add a router link to the user's accounts page (don't use the a tag!) -->
           <router-link :to="`/accounts/user/${userID}/accounts`" class="nav-link" active-class="active" @click="updateComponent">My Accounts</router-link>
         </li>
-        <li class="nav-item"  v-if="userRole === 'ROLE_USER' || userRole === 'ROLE_EMPLOYEE'">
-          <!-- Add a router link to the user's accounts page (don't use the a tag!) -->
-          <router-link :to="`/users/${userID}/personal`" class="nav-link" active-class="active" @click="updateComponent">My Profile</router-link>
-        </li>
         <li class="nav-item" v-if="userRole === 'ROLE_EMPLOYEE'">
           <!-- add a router link to the all users page (don't use the a tag!) -->
           <router-link to="/users" class="nav-link" active-class="active">All Users</router-link>

@@ -29,10 +29,10 @@ export default {
       if (Array.isArray(roles)) {
         const combined = roles.join(", "); // Combines the roles into a string separated by commas
 
-        if (roles.includes("ROLE_EMPLOYEE")) {
+        if(roles.includes("ROLE_EMPLOYEE")){
           return "Employee";
         }
-        else if (roles.includes("ROLE_USER")) {
+        else if(roles.includes("ROLE_USER")){
           return "User";
         }
       }

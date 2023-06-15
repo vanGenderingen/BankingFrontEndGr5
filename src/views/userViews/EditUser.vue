@@ -4,44 +4,66 @@
     <div class="container">
       <div class="content">
         <div class="user-info">
-          <div class="update-button">
-            <button @click="cancelBtn" class="update-btn" id="cancel-btn">
-              Cancel
-            </button>
-          </div>
           <div id="user-avatar">
             <img src="/src/assets/images/logo-redbank.png" alt="Red Bank Logo" />
           </div>
           <div class="user-details">
-            <div class="form-group" v-if="userRole === 'ROLE_EMPLOYEE'">
+            <div class="form-group">
               <label for="first-name">First Name:</label>
-              <input v-model="user.FirstName" type="text" id="first-name" class="form-control" />
+              <input
+                v-model="user.FirstName"
+                type="text"
+                id="first-name"
+                class="form-control"
+              />
             </div>
-            <div class="form-group" v-if="userRole === 'ROLE_EMPLOYEE'">
+            <div class="form-group">
               <label for="last-name">Last Name:</label>
-              <input v-model="user.LastName" type="text" id="last-name" class="form-control" />
+              <input
+                v-model="user.LastName"
+                type="text"
+                id="last-name"
+                class="form-control"
+              />
             </div>
-            <div class="form-group" v-if="userRole === 'ROLE_EMPLOYEE'">
+            <div class="form-group">
               <label for="email">Email:</label>
               <input v-model="user.Email" type="email" id="email" class="form-control" />
             </div>
-            <div class="form-group" id="form-active" v-if="userRole === 'ROLE_EMPLOYEE'">
+            <div class="form-group" id="form-active">
               <label for="active">Active:</label>
               <input v-model="user.Active" type="checkbox" id="active-check" class="form-box" />
             </div>
-            <div class="form-group" v-if="userRole === 'ROLE_USER' || userRole === 'ROLE_EMPLOYEE'">
+            <div class="form-group">
               <label for="transaction-limit">Transaction Limit:</label>
-              <input v-model="user.TransactionLimit" type="number" id="transaction-limit" class="form-control" />
+              <input
+                v-model="user.TransactionLimit"
+                type="number"
+                id="transaction-limit"
+                class="form-control"
+              />
             </div>
-            <div class="form-group" v-if="userRole === 'ROLE_USER' || userRole === 'ROLE_EMPLOYEE'">
+            <div class="form-group">
               <label for="daily-limit">Daily Limit:</label>
-              <input v-model="user.DailyLimit" type="number" id="daily-limit" class="form-control" />
+              <input
+                v-model="user.DailyLimit"
+                type="number"
+                id="daily-limit"
+                class="form-control"
+              />
             </div>
           </div>
 
           <div class="update-button">
-            <button id="update-btn" @click="updateUser" class="update-btn">
+            <button @click="updateUser" class="update-btn">
               Update User
+            </button>
+            <button
+              @click="this.$router.push(`/users/${this.user.UserID}`)"
+              class="update-btn"
+              id="cancel-btn"
+            >
+              Cancel
             </button>
           </div>
         </div>
@@ -52,7 +74,6 @@
 
 <script>
 import Header from "@/views/generalViews/Header.vue";
-import VueJwtDecode from 'vue-jwt-decode';
 import axios from "axios";
 
 const token = sessionStorage.getItem("token");
@@ -64,8 +85,6 @@ export default {
   },
   data() {
     return {
-      userRole: '',
-      
       user: {
         FirstName: "",
         LastName: "",
@@ -77,23 +96,15 @@ export default {
     };
   },
   methods: {
-    cancelBtn(){
-      const userId = this.$route.params.userId;
-      if (this.userRole === 'ROLE_USER') {
-        this.$router.push(`/users/${this.userID}/personal`);
-      } else {
-        this.$router.push(`/users/${userId}`);
-      }
-    },     
     fetchUser() {
       const userId = this.$route.params.userId;
       const url = `http://localhost:8080/users/${userId}`;
       axios
         .get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
         .then((response) => {
           this.user = response.data;
         })
@@ -117,43 +128,23 @@ export default {
       console.log("Updating user:", updateUserDTO);
       axios
         .put(url, updateUserDTO, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
         .then((response) => {
           console.log("User updated successfully:", response.data);
-          
+          this.$router.push(`/users`);
         })
         .catch((error) => {
           console.error("Error updating user:", error);
           // Handle error
         });
-
-        if (this.userRole === 'ROLE_USER') {
-          this.$router.push(`/users/${userID}/personal`);
-        } else {
-          this.$router.push(`/users`);
-        }
     },
   },
   mounted() {
     this.fetchUser();
-
-    try {
-      const decodedToken = VueJwtDecode.decode(token);
-      const hasEmployeeRole = decodedToken.auth.some(auth => auth.role === 'ROLE_EMPLOYEE');
-      this.userID = decodedToken.sub;
-
-      if (hasEmployeeRole) {
-        this.userRole = 'ROLE_EMPLOYEE';
-      } else {
-        this.userRole = 'ROLE_USER';
-      }
-    } catch (err) {
-      console.log('Token is null: ', err);
-    }
-  }
+  },
 };
 </script>
 
@@ -162,10 +153,9 @@ export default {
   display: grid;
 
 }
-
 #active-check {
   width: 20px;
-
+ 
   appearance: none;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -199,7 +189,7 @@ export default {
 }
 
 #user-avatar img {
-  margin-left: 30%;
+  margin-left: 25%;
   width: 150px;
   height: 150px;
 }
@@ -223,25 +213,27 @@ export default {
 
 .update-button {
   display: flex;
+  justify-content: center;
   margin-top: 10px;
-
+  
 }
 
 .update-btn {
   display: inline-block;
   position: relative;
-  background-color: transparent;
+  background-color: #6f00ff;
   color: white;
   border: none;
   cursor: pointer;
   transition: none;
   box-shadow: none;
+  width: 70%;
   padding: 5px;
 }
 
 .update-btn:hover,
 .update-btn:active {
-  background-color: transparent;
+  background-color: #6f00ffbb;
 }
 
 .update-btn::after {
@@ -262,13 +254,12 @@ export default {
   transform-origin: bottom left;
 }
 
-#update-btn {
-  margin-left: 35%;
+#cancel-btn {
+  margin-left: 5%;
+  background-color: #ff0000;
 }
 
-#cancel-btn {
-  justify-content: left;
-
-  background-color: transparent;
+#cancel-btn:hover{
+  background-color: #ff000094;
 }
 </style>
