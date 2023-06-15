@@ -68,6 +68,7 @@
             :account="account"
           ></account-list-item>
         </tbody>
+        <p id="total-balance">Total balance for the displayed accounts: {{totalBalance}}</p>
       </table>
     </div>
   </div>
@@ -92,6 +93,7 @@ export default {
       availableItemsPerPage: [10, 20, 30],
       searchQuery: "",
       hasAccounts: true,
+      totalBalance: 0,
     };
   },
   methods: {
@@ -131,6 +133,7 @@ export default {
         })
         .then(response => {
           this.accounts = response.data;
+          this.accounts.forEach(this.calculateTotalBalance);
         })
         .catch((error) => {
           console.error("Error retrieving accounts:", error);
@@ -140,6 +143,9 @@ export default {
       this.currentPage = 1;
       this.fetchAccounts();
     },
+    calculateTotalBalance(account) {
+      this.totalBalance += account.Balance;
+    }
   },
   computed: {
     displayedAccounts() {
