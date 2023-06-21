@@ -157,9 +157,9 @@ export default {
     createTransaction() {
       // Perform any necessary checks or actions before navigating to the create transaction page
       // Navigate to the create transaction page
-      this.$router.push('/transactions/${this.account.AccountID}/createAccount');
+      this.$router.push(`/transactions/${this.account.AccountID}/createTransaction`);
       },
-    editAccount() {
+    editAccount() {ßß
       this.$router.push(`/users/${this.account.AccountID}/editAccount`);
       },
     goToUserAccounts(){
