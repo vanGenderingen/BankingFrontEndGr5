@@ -14,12 +14,14 @@ import EditUser from '@/views/userViews/EditUser.vue';
 import EditAccount from "@/views/accountViews/EditAccount.vue";
 import PersonalUserOverview from "@/views/userViews/PersonalUserOverview.vue";
 import CreateTransaction from "@/views/transactionViews/CreateTransaction.vue";
+import ForgotPassword from "@/views/generalViews/ForgotPassword.vue";
 
 const routes = [
     //General Routes
   { path: '/', component: Home },
   { path: '/products', component: ProductOverview },
   { path: '/login', component: Login },
+  { path: '/forgot-password', component: ForgotPassword },
 
     //User Routes
   { path: '/users', component: UsersOverview },
@@ -37,6 +39,7 @@ const routes = [
 
   //Transaction Routes
   { path: '/transactions/:accountId/createTransaction', component: CreateTransaction },
+
 
   //Transactions routes
   //{ path: '/transactions/:accountId/createAccount', component: CreateTransaction },
