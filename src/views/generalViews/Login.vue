@@ -9,7 +9,7 @@
       <button id="login-button" type="submit" :disabled="isLoggedIn">Log in</button>
       
     </form>
-    <button id="login-button" href="/forgotpassword" >Forgot Password</button>
+    <router-link to="/forgot-password">Forgot Password</router-link>
   </div>
   </div>
   <div class="creating-account">

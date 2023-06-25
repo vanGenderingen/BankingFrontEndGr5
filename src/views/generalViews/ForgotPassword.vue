@@ -24,7 +24,7 @@
       const requestBody = {
         email: this.email
       };
-
+      sessionStorage.setItem('email', email);
       axios.post('http://localhost:8080/forgot-password', requestBody)
         .then(response => {
           // Handle the response if needed
