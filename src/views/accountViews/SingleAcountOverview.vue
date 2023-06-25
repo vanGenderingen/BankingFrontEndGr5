@@ -43,7 +43,8 @@
         <table class="transaction-table">
           <thead>
           <tr>
-            <th class="transaction-table-head"><h2>Date</h2></th>
+            <th class="transaction-table-head"><h2>From IBAN</h2></th>
+            <th class="transaction-table-head"><h2>To IBAN</h2></th>
             <th class="transaction-table-head"><h2>Description</h2></th>
             <th class="transaction-table-head"><h2>Type</h2></th>
             <th class="transaction-table-head"><h2>amount</h2></th>
@@ -103,7 +104,6 @@ export default {
           })
           .then(response => {
             this.account = response.data;
-            this.fetchTransactions();
           })
           .catch(error => {
             console.error("Error retrieving account:", error);

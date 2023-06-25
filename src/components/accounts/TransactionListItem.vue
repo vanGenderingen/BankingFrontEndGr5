@@ -1,6 +1,7 @@
 <template>
   <tr class="transaction-item" @click="navigateToAccount">
-    <td class="transaction-cell">{{ formatDate(transaction.timeStamp) }}</td>
+    <td class="transaction-cell">{{ transaction.fromIBAN }}</td>
+    <td class="transaction-cell">{{ transaction.toIBAN }}</td>
     <td class="transaction-cell">{{ transaction.description }}</td>
     <td class="transaction-cell">{{ transaction.transactionType }}</td>
     <td class="transaction-cell">{{ transaction.amount }}</td>
