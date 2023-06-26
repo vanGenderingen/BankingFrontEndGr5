@@ -9,7 +9,10 @@
       <button id="login-button" type="submit" :disabled="isLoggedIn">Log in</button>
       
     </form>
-    <router-link to="/forgot-password">Forgot Password</router-link>
+    <div v-if="message" :class="{ success: isSuccess, error: !isSuccess }">
+        {{ message }}
+      </div>
+    <router-link id="forgotpassword" to="/forgot-password">Forgot Password?</router-link>
   </div>
   </div>
   <div class="creating-account">
@@ -38,6 +41,8 @@ export default {
       email: '',
       password: '',
       token: '',
+      message: '',
+      isSuccess: false,
     };
   },
   computed: {
@@ -57,6 +62,8 @@ export default {
           .then(response => {
             const token = response.data.token;
             console.log('Login successful:', token);
+            this.message = 'Logged in successfully';
+            this.isSuccess = true;
             // Store the token in the session storage
             sessionStorage.setItem('token', token);
             try {
@@ -70,6 +77,8 @@ export default {
           })
           .catch(error => {
             console.error('Error logging in:', error);
+            this.message = 'An error occurred. Please try again later.';
+            this.isSuccess = false;
             // Handle the login error, such as displaying an error message
           });
 
@@ -97,6 +106,11 @@ export default {
   margin: 2%;
   color: white;
   font-weight: 300;
+}
+#forgotpassword{
+  color: white;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .h2-login {
@@ -139,4 +153,14 @@ export default {
   border: 1px solid #6f00ff;
   border-radius: 10px;
   cursor: pointer;
-}</style>
+}
+.success {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .error {
+    color: white;
+    font-weight: bold;
+  }
+</style>
