@@ -22,16 +22,7 @@ export default {
       // Assuming you're using Vue Router
       this.$router.push(`/accounts/${this.transaction.transactionID}`);
     },
-    formatDate(timestamp) {
-      const date = new Date(timestamp.year, timestamp.monthValue - 1, timestamp.dayOfMonth);
-      const dayOfWeek = timestamp.dayOfWeek;
-      const month = timestamp.month;
-      const day = timestamp.dayOfMonth;
-      const year = timestamp.year;
-
-      return `${dayOfWeek} - ${month} - ${day} - ${year}`;
     }
-  }
 }
 </script>
 
@@ -46,6 +37,6 @@ export default {
 .transaction-cell {
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 8px;
+  padding-left: 5px;
 }
 </style>

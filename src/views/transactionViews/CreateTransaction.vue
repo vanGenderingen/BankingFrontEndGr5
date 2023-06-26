@@ -1,14 +1,15 @@
 <template>
   <div>
     <div class="create-transaction">
+      <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
       <h2>Make a transfer</h2>
       <form @submit.prevent="createTransaction">
         <div class="form-group">
           <label for="transaction-type">Transaction Type:</label>
-          <select id="transaction-type" v-model="selectedTransactionType" @change="updateFieldsVisibility">
-            <option value="transfer">Transfer</option>
-            <option value="withdraw">Withdraw</option>
-            <option value="deposit">Deposit</option>
+          <select id="transaction-type" v-model="type" @change="updateFieldsVisibility">
+            <option value="Transfer">Transfer</option>
+            <option value="Withdrawal">Withdrawal</option>
+            <option value="Deposit">Deposit</option>
           </select>
         </div>
         <div class="form-group" v-if="showFromIBANField">
@@ -21,7 +22,8 @@
         </div>
         <div class="form-group">
           <label for="amount">Amount:</label>
-          <input type="number" min="0.00" :max="maxAmount" vue-number-format id="amount" v-model="transaction.amount" required />
+          <input type="number" min="0.00" :max="maxAmount" vue-number-format id="amount" v-model="transaction.amount"
+            required />
         </div>
         <div class="form-group">
           <label for="description">Description:</label>
@@ -46,11 +48,12 @@ export default {
   },
   data() {
     return {
+      errorMessage: null,
       account: {},
-      selectedTransactionType: "transfer",
       accountID: this.$route.params.accountId,
       showToIBANField: true,
       showFromIBANField: true,
+      type: "Transfer",
       maxAmount: 0,
       transaction: {
         fromIBAN: "",
@@ -79,6 +82,7 @@ export default {
           this.maxAmount = response.data.Balance;
         })
         .catch((error) => {
+          this.errorMessage = error.response.data.message;
           console.error("Error retrieving account:", error);
         });
     },
@@ -91,7 +95,7 @@ export default {
         fromIBAN: this.transaction.fromIBAN,
         toIBAN: this.transaction.toIBAN,
         amount: this.transaction.amount,
-        transactionType: "Transfer",
+        transactionType: this.type,
         description: this.transaction.description,
       };
 
@@ -103,25 +107,28 @@ export default {
         })
         .then((response) => {
           console.log("Transaction created:", response.data);
-          router.push(`/accounts/${this.$route.params.accountID}`);
+          router.push(`/accounts/${this.accountID}`);
         })
         .catch((error) => {
+          this.errorMessage = error.response.data.message;
           console.error("Error retrieving account:", error);
         });
     },
     updateFieldsVisibility() {
       if (
-        this.selectedTransactionType === "withdraw"
+        this.type === "Withdrawal"
       ) {
         this.showToIBANField = false;
         this.showFromIBANField = true;
         this.transaction.fromIBAN = this.account.IBAN;
-        this.transaction.toIBAN = "";
-      } else if(this.selectedTransactionType === "deposit") {
+        this.transaction.toIBAN = "NL01INHO0000000001";
+      } else if (this.type === "Deposit") {
         this.showToIBANField = true;
         this.showFromIBANField = false;
         this.transaction.toIBAN = this.account.IBAN;
-      }else{
+        this.transaction.fromIBAN = "NL01INHO0000000001";
+        this.maxAmount = 100000;
+      } else {
         this.showToIBANField = true;
         this.showFromIBANField = true;
       }
@@ -141,6 +148,7 @@ export default {
         this.isAdmin = true;
       }
     } catch (err) {
+      this.errorMessage = "Something went wrong. Please try again later.";
       console.log("Token is null: ", err);
     }
   },

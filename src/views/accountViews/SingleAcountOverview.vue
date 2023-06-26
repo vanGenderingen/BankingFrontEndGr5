@@ -5,22 +5,41 @@
       <button @click="goToUserAccounts" id="go-to-user-accounts">Go Back</button>
       <div class="account-info">
         <div class="account-details">
-          <div class="label"><h2>Account Name:</h2></div>
-          <div class="value"><h2>{{ account.Name }}</h2></div>
-          <div class="label"><h2>Balance:</h2></div>
-          <div class="value"><h2>{{ account.Balance }}</h2></div>
-          <div class="label"><h2>Account Type:</h2></div>
-          <div class="value"><h2>{{ account.Type }}</h2></div>
-          <div class="label"><h2>Minimum Balance:</h2></div>
-          <div class="value"><h2>{{ account.MinBal }}</h2></div>
+          <div class="label">
+            <h2>Account Name:</h2>
+          </div>
+          <div class="value">
+            <h2>{{ account.Name }}</h2>
+          </div>
+          <div class="label">
+            <h2>Balance:</h2>
+          </div>
+          <div class="value">
+            <h2>{{ account.Balance }}</h2>
+          </div>
+          <div class="label">
+            <h2>Account Type:</h2>
+          </div>
+          <div class="value">
+            <h2>{{ account.Type }}</h2>
+          </div>
+          <div class="label">
+            <h2>Minimum Balance:</h2>
+          </div>
+          <div class="value">
+            <h2>{{ account.MinBal }}</h2>
+          </div>
         </div>
         <div id="account-logo">
           <img src="/src/assets/images/logo-redbank.png" alt="Logo" />
         </div>
       </div>
       <div class="account-info-buttons">
-        <button class="account-info-button-createTransaction" v-if="userRole === 'ROLE_USER' || userRole === 'ROLE_EMPLOYEE'" @click="createTransaction">Create a new Transaction</button>
-        <button class="account-info-button-editAccount" v-if="userRole === 'ROLE_EMPLOYEE'" @click="editAccount">Edit this Account</button>
+        <button class="account-info-button-createTransaction"
+          v-if="userRole === 'ROLE_USER' || userRole === 'ROLE_EMPLOYEE'" @click="createTransaction">Create a new
+          Transaction</button>
+        <button class="account-info-button-editAccount" v-if="userRole === 'ROLE_EMPLOYEE'" @click="editAccount">Edit this
+          Account</button>
       </div>
       <div class="transaction-overview">
         <div class="pagination-and-amount-and-search">
@@ -39,23 +58,41 @@
               <button @click="nextPage" class="pagination-button">Next Page</button>
             </div>
           </div>
+          <div class="search">
+            <input type="number" min="0" v-model="filterAmount" @input="setAmountFilter" @change="setAmountFilter"
+              placeholder="amount" />
+          </div>
+          <div class="form-group">
+            <select id="amount" v-model="amountSearch" @change="setAmountFilter">
+              <option value="equal">equal</option>
+              <option value="lower">lower</option>
+              <option value="higher">higher</option>
+            </select>
+          </div>
         </div>
         <table class="transaction-table">
           <thead>
-          <tr>
-            <th class="transaction-table-head"><h2>From IBAN</h2></th>
-            <th class="transaction-table-head"><h2>To IBAN</h2></th>
-            <th class="transaction-table-head"><h2>Description</h2></th>
-            <th class="transaction-table-head"><h2>Type</h2></th>
-            <th class="transaction-table-head"><h2>amount</h2></th>
-          </tr>
+            <tr>
+              <th class="transaction-table-head">
+                <h2>From IBAN</h2>
+              </th>
+              <th class="transaction-table-head">
+                <h2>To IBAN</h2>
+              </th>
+              <th class="transaction-table-head">
+                <h2>Description</h2>
+              </th>
+              <th class="transaction-table-head">
+                <h2>Type</h2>
+              </th>
+              <th class="transaction-table-head">
+                <h2>amount</h2>
+              </th>
+            </tr>
           </thead>
           <tbody>
-          <transaction-list-item
-              v-for="transaction in displayedTransactions"
-              :key="transaction.transactionID"
-              :transaction="transaction"
-          ></transaction-list-item>
+            <transaction-list-item v-for="transaction in displayedTransactions" :key="transaction.transactionID"
+              :transaction="transaction"></transaction-list-item>
           </tbody>
         </table>
       </div>
@@ -79,13 +116,16 @@ export default {
     return {
       accountID: this.$route.params.accountId,
       account: {},
-
       currentPage: 1,
       itemsPerPage: 10,
       availableItemsPerPage: [10, 20, 30],
       searchQuery: "",
       transactions: [],
       displayedTransactions: [],
+      filterAmount: null,
+      higher: null,
+      lower: null,
+      equal: null,
 
       userRole: 'ROLE_USER'
     };
@@ -97,17 +137,17 @@ export default {
       const token = sessionStorage.getItem('token');
 
       axios
-          .get(url, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          })
-          .then(response => {
-            this.account = response.data;
-          })
-          .catch(error => {
-            console.error("Error retrieving account:", error);
-          });
+        .get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        .then(response => {
+          this.account = response.data;
+        })
+        .catch(error => {
+          console.error("Error retrieving account:", error);
+        });
     },
     previousPage() {
       if (this.currentPage > 1) {
@@ -128,26 +168,29 @@ export default {
     fetchTransactions() {
       const limit = this.itemsPerPage;
       const offset = this.currentPage - 1;
-      const accountID = this.account.accountID;
+      const accountID = this.accountID;
+      const equal = this.equal;
+      const higher = this.higher;
+      const lower = this.lower;
 
       const url = `http://localhost:8080/transactions`;
-      const params = { limit, offset, accountID };
+      const params = { limit, offset, accountID, equal, higher, lower };
 
       const token = sessionStorage.getItem('token');
 
       axios
-          .get(url, {
-            params,
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          })
-          .then(response => {
-            this.transactions = response.data;
-          })
-          .catch(error => {
-            console.error("Error retrieving transactions:", error);
-          });
+        .get(url, {
+          params: params,
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        .then(response => {
+          this.transactions = response.data;
+        })
+        .catch(error => {
+          console.error("Error retrieving transactions:", error);
+        });
     },
     search() {
       // Perform a search when the search query changes
@@ -158,16 +201,33 @@ export default {
       // Perform any necessary checks or actions before navigating to the create transaction page
       // Navigate to the create transaction page
       this.$router.push(`/transactions/${this.account.AccountID}/createTransaction`);
-      },
-    editAccount() {ßß
+    },
+    editAccount() {
+      ßß
       this.$router.push(`/users/${this.account.AccountID}/editAccount`);
-      },
-    goToUserAccounts(){
+    },
+    goToUserAccounts() {
       const token = sessionStorage.getItem('token');
       const decodedToken = VueJwtDecode.decode(token);
       this.userId = decodedToken.sub;
       this.$router.push(`/accounts/user/${this.userId}/accounts`);
-    }
+    },
+    setAmountFilter() {
+      if (this.amountSearch === 'equal') {
+        this.equal = this.filterAmount
+        this.lower = null
+        this.higher = null
+      } else if (this.amountSearch === 'lower') {
+        this.lower = this.filterAmount
+        this.equal = null
+        this.higher = null
+      } else if (this.amountSearch === 'higher') {
+        this.higher = this.filterAmount
+        this.equal = null
+        this.lower = null
+      }
+      this.fetchTransactions();
+    },
   },
   mounted() {
     this.fetchAccount();
@@ -188,7 +248,7 @@ export default {
     }
   },
   computed: {
-    displayedTransactions(){
+    displayedTransactions() {
       return this.transactions.slice(0, this.itemsPerPage);
     },
   },
@@ -233,7 +293,7 @@ export default {
   height: 200px;
 }
 
-.account-info-buttons{
+.account-info-buttons {
   margin-top: 20px;
   align-self: stretch;
   display: flex;
@@ -355,6 +415,7 @@ export default {
   color: black;
   background-color: white;
 }
+
 .pagination {
   margin-left: 40px;
 }
@@ -440,7 +501,8 @@ export default {
 }
 
 .search-input {
-  flex: 1; /* Take up remaining space */
+  flex: 1;
+  /* Take up remaining space */
   border: none;
   margin-right: 10px;
   background-color: transparent;
@@ -469,5 +531,4 @@ td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ccc;
-}
-</style>
+}</style>
