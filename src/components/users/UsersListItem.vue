@@ -8,6 +8,7 @@
     <td class="user-cell">{{ user.Active ? "Active" : "Inactive" }}</td>
     <td class="user-cell">{{ user.TransactionLimit }}</td>
     <td class="user-cell">{{ user.DailyLimit }}</td>
+    <td class="user-cell">{{ user.LeftOverDailyLimit }}</td>
   </tr>
 </template>
 
