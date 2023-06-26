@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
           <label for="amount">Amount:</label>
-          <input type="number" min="0.00" :max="maxAmount" vue-number-format id="amount" v-model="transaction.amount"
+          <input type="number" min="0.00" vue-number-format id="amount" v-model="transaction.amount"
             required />
         </div>
         <div class="form-group">
@@ -54,7 +54,6 @@ export default {
       showToIBANField: true,
       showFromIBANField: true,
       type: "Transfer",
-      maxAmount: 0,
       transaction: {
         fromIBAN: "",
         toIBAN: "",
@@ -79,7 +78,6 @@ export default {
         .then((response) => {
           this.account = response.data;
           this.transaction.fromIBAN = response.data.IBAN;
-          this.maxAmount = response.data.Balance;
         })
         .catch((error) => {
           this.errorMessage = error.response.data.message;
@@ -127,7 +125,7 @@ export default {
         this.showFromIBANField = false;
         this.transaction.toIBAN = this.account.IBAN;
         this.transaction.fromIBAN = "NL01INHO0000000001";
-        this.maxAmount = 100000;
+        this.maxAmount = 999999999999;
       } else {
         this.showToIBANField = true;
         this.showFromIBANField = true;
