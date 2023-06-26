@@ -219,7 +219,6 @@ export default {
       this.$router.push(`/transactions/${this.account.AccountID}/createTransaction`);
     },
     editAccount() {
-      ßß
       this.$router.push(`/users/${this.account.AccountID}/editAccount`);
     },
     goToUserAccounts() {
