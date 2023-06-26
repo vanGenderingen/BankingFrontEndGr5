@@ -12,6 +12,8 @@ import CreateUser from '@/views/userViews/CreateUser.vue';
 import UserOverview from '@/views/userViews/UserOverview.vue';
 import EditUser from '@/views/userViews/EditUser.vue';
 import EditAccount from "@/views/accountViews/EditAccount.vue";
+import PersonalUserOverview from "@/views/userViews/PersonalUserOverview.vue";
+import CreateTransaction from "@/views/transactionViews/CreateTransaction.vue";
 
 const routes = [
     //General Routes
@@ -24,6 +26,7 @@ const routes = [
   { path: '/users/create', component: CreateUser },
   { path: '/users/:userId', component: UserOverview },
   { path: '/users/:userId/edit', component: EditUser },
+  { path: '/users/:userId/personal', component: PersonalUserOverview },
 
     //Account Routes
   { path: '/accounts', component: GetAllAccounts},
@@ -31,6 +34,9 @@ const routes = [
   { path: '/accounts/user/:userId/accounts', component: UserAccountsOverview },
   { path: '/users/:userId/createAccount', component: CreateAccount },
   { path: '/users/:accountId/editAccount', component: EditAccount },
+
+  //Transaction Routes
+  { path: '/transactions/:accountId/createTransaction', component: CreateTransaction },
 
   //Transactions routes
   //{ path: '/transactions/:accountId/createAccount', component: CreateTransaction },
