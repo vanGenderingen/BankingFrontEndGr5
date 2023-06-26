@@ -58,7 +58,18 @@
               <button @click="nextPage" class="pagination-button">Next Page</button>
             </div>
           </div>
-          <div class="search">
+          <div class="searchIBAN">
+            <input v-model="IBANFilter" @input="setIBANFilter" @change="setIBANFilter"
+              placeholder="IBAN" />
+          </div>
+          <div class="form-group">
+            <select id="amount" v-model="IBANSearch" @change="setIBANFilter">
+              <option value="Null">Null</option>
+              <option value="To">To</option>
+              <option value="From">From</option>
+            </select>
+          </div>
+          <div class="searchAmount">
             <input type="number" min="0" v-model="filterAmount" @input="setAmountFilter" @change="setAmountFilter"
               placeholder="amount" />
           </div>
@@ -123,9 +134,12 @@ export default {
       transactions: [],
       displayedTransactions: [],
       filterAmount: null,
+      IBANFilter: null,
       higher: null,
       lower: null,
       equal: null,
+      toIBAN: null,
+      fromIBAN: null,
 
       userRole: 'ROLE_USER'
     };
@@ -172,9 +186,11 @@ export default {
       const equal = this.equal;
       const higher = this.higher;
       const lower = this.lower;
+      const toIBAN = this.toIBAN;
+      const fromIBAN = this.fromIBAN;
 
       const url = `http://localhost:8080/transactions`;
-      const params = { limit, offset, accountID, equal, higher, lower };
+      const params = { limit, offset, accountID, fromIBAN, toIBAN ,equal, higher, lower };
 
       const token = sessionStorage.getItem('token');
 
@@ -228,6 +244,19 @@ export default {
       }
       this.fetchTransactions();
     },
+    setIBANFilter(){
+      if (this.IBANSearch === 'To') {
+        this.toIBAN = this.IBANFilter
+        this.fromIBAN = null
+      } else if (this.IBANSearch === 'From') {
+        this.fromIBAN = this.IBANFilter
+        this.toIBAN = null
+      } else {
+        this.toIBAN = null
+        this.fromIBAN = null
+      }
+      this.fetchTransactions();
+    }
   },
   mounted() {
     this.fetchAccount();
