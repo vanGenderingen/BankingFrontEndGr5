@@ -29,6 +29,10 @@
             <div class="value">
               <h2>{{ user.DailyLimit }}</h2>
             </div>
+            <div class="label"><h2>Daily Limit Left:</h2></div>
+            <div class="value">
+              <h2>{{ user.LeftOverDailyLimit }}</h2>
+            </div>
           </div>
           <div id="user-logo">
             <img src="/src/assets/images/logo-redbank.png" alt="Red Bank Logo" />
