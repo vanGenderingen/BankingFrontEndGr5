@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28661940-f57a-4a71-b4f8-5615742efd0b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/accountViews/SingleAcountOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/accountViews/SingleAcountOverview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/generalViews/ForgotPassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generalViews/ForgotPassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/generalViews/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generalViews/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/generalViews/ResetPassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/generalViews/ResetPassword.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,21 +35,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Florebol/Documents/GitHub/BankingFrontEndGr5&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PhpStorm 2022.3.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Jelle",
+    "last_opened_file_path": "C:/Users/Florebol/Documents/GitHub/BankingFrontEndGr5",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PhpStorm 2022.3.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Florebol\Documents\GitHub\BankingFrontEndGr5\src\views\userViews" />
@@ -73,6 +75,7 @@
       <workItem from="1686747905974" duration="349000" />
       <workItem from="1686748389474" duration="604000" />
       <workItem from="1686767544530" duration="578000" />
+      <workItem from="1687810603810" duration="13000" />
     </task>
     <servers />
   </component>
