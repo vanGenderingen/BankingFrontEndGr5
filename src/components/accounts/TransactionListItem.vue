@@ -1,6 +1,7 @@
 <template>
   <tr class="transaction-item" @click="navigateToAccount">
-    <td class="transaction-cell">{{ formatDate(transaction.timeStamp) }}</td>
+    <td class="transaction-cell">{{ transaction.fromIBAN }}</td>
+    <td class="transaction-cell">{{ transaction.toIBAN }}</td>
     <td class="transaction-cell">{{ transaction.description }}</td>
     <td class="transaction-cell">{{ transaction.transactionType }}</td>
     <td class="transaction-cell">{{ transaction.amount }}</td>
@@ -21,16 +22,7 @@ export default {
       // Assuming you're using Vue Router
       this.$router.push(`/accounts/${this.transaction.transactionID}`);
     },
-    formatDate(timestamp) {
-      const date = new Date(timestamp.year, timestamp.monthValue - 1, timestamp.dayOfMonth);
-      const dayOfWeek = timestamp.dayOfWeek;
-      const month = timestamp.month;
-      const day = timestamp.dayOfMonth;
-      const year = timestamp.year;
-
-      return `${dayOfWeek} - ${month} - ${day} - ${year}`;
     }
-  }
 }
 </script>
 
@@ -45,6 +37,6 @@ export default {
 .transaction-cell {
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 8px;
+  padding-left: 5px;
 }
 </style>
